@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "tslint-config-airbnb",
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    "indent": [true, "spaces", 2],
+    "ter-indent": [true, 2, { "SwitchCase": 1 }],
+    "max-line-length": [false],
+    "radix": false,
+    "no-increment-decrement": false,
+    "space-before-function-paren": false,
+    "import-name": false,
+    "variable-name": false,
+    "object-curly-spacing": [
+      true,
+      "always"
+    ],
+    "ter-arrow-parens": [true, "as-needed"],
+    "semicolon": false
+  }
+}

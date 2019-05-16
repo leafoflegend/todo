@@ -1,0 +1,35 @@
+const enum UserTypes {
+  ADMIN = 'USER_TYPE_ADMIN',
+  LEADER = 'USER_TYPE_LEADER',
+  STANDARD = 'USER_TYPE_STANDARD',
+  READONLY = 'USER_TYPE_READONLY',
+}
+
+const enum RoleTypes {
+  ADMIN = 'ROLE_TYPE_ADMIN',
+  LEADER = 'ROLE_TYPE_LEADER',
+  STANDARD = 'ROLE_TYPE_STANDARD',
+  READONLY = 'ROLE_TYPE_READONLY',
+}
+
+const CONSTANTS = {
+  SEQUELIZE: 'SEQUELIZE',
+  USER_TYPES: {
+    ADMIN: UserTypes.ADMIN,
+    LEADER: UserTypes.LEADER,
+    STANDARD: UserTypes.STANDARD,
+    READONLY: UserTypes.READONLY,
+  },
+  ROLE_TYPES: {
+    ADMIN: RoleTypes.ADMIN,
+    LEADER: RoleTypes.LEADER,
+    STANDARD: RoleTypes.STANDARD,
+    READONLY: RoleTypes.READONLY,
+  },
+  AUTHENTICATION: {
+    SALT_ROUNDS: 12,
+  },
+};
+
+export { UserTypes, RoleTypes };
+export default CONSTANTS;
