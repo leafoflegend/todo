@@ -1,7 +1,7 @@
 import { Table, Model, ForeignKey, Column, DataType } from 'sequelize-typescript';
 import User from './user';
 import Team from './team';
-import CONSTANTS from '../../constants';
+import CONSTANTS, { RoleTypes } from '../../constants';
 import { ValueOf } from 'types/utility';
 
 const { STANDARD, ADMIN, LEADER, READONLY } = CONSTANTS.ROLE_TYPES;
@@ -33,11 +33,11 @@ class UserTeam extends Model<UserTeam> {
   team_id!: number;
 
   @Column({
-    type: DataType.ENUM([STANDARD, ADMIN, LEADER, READONLY]),
+    type: DataType.ENUM<RoleTypes>(STANDARD, ADMIN, LEADER, READONLY),
     allowNull: false,
     defaultValue: STANDARD,
   })
-  role!: ValueOf<typeof CONSTANTS.ROLE_TYPES>;
+  role!: RoleTypes;
 }
 
 export default UserTeam;

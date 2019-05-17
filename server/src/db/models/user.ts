@@ -88,7 +88,7 @@ class User extends Model<User> {
   phone_number!: string;
 
   @Column({
-    type: DataType.ENUM([ADMIN, LEADER, READONLY, STANDARD]),
+    type: DataType.ENUM<UserTypes>(ADMIN, LEADER, READONLY, STANDARD),
     allowNull: false,
     defaultValue: STANDARD,
   })
