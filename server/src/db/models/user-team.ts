@@ -2,7 +2,6 @@ import { Table, Model, ForeignKey, Column, DataType } from 'sequelize-typescript
 import User from './user';
 import Team from './team';
 import CONSTANTS, { RoleTypes } from '../../constants';
-import { ValueOf } from 'types/utility';
 
 const { STANDARD, ADMIN, LEADER, READONLY } = CONSTANTS.ROLE_TYPES;
 
