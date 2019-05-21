@@ -2,7 +2,6 @@
 
 lint:
 	npx prettier --loglevel error 'src/**/*.ts' --write
-	npx prettier --loglevel error 'js/**/*.js' --write
 	npx tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
 
 build:
