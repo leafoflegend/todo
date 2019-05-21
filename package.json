@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leafoflegend/todo-be.git"
+    "url": "git+https://github.com/leafoflegend/todo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/leafoflegend/todo-be/issues"
+    "url": "https://github.com/leafoflegend/todo/issues"
   },
-  "homepage": "https://github.com/leafoflegend/todo-be#readme",
+  "homepage": "https://github.com/leafoflegend/todo#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",

@@ -5,10 +5,12 @@ import {
   DataType,
   HasMany,
   BelongsToMany,
+  BelongsTo,
   BeforeCreate,
   BeforeUpdate,
   DefaultScope,
   Scopes,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { ValidationError } from 'sequelize';
 import CONSTANTS, { UserTypes } from '../../constants';
@@ -22,6 +24,7 @@ import Contribution from './contribution';
 import Contributor from './contributor';
 import UserAssignmentWatcher from './user-assignment-watcher';
 import UserTaskWatcher from './user-task-watcher';
+import Session from './session';
 
 const { ADMIN, LEADER, READONLY, STANDARD } = CONSTANTS.USER_TYPES;
 
@@ -93,6 +96,16 @@ class User extends Model<User> {
     defaultValue: STANDARD,
   })
   type!: UserTypes;
+
+  @BelongsTo(() => Session)
+  session!: Session;
+
+  @ForeignKey(() => Session)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  session_id!: number;
 
   @BelongsToMany(() => Team, () => UserTeam)
   teams!: Team[];

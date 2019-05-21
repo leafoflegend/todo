@@ -37,12 +37,14 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
+    "@nest-middlewares/cookie-parser": "^6.0.0",
     "@nestjs/common": "^6.0.1",
     "@nestjs/core": "^6.0.1",
     "@nestjs/platform-express": "^6.0.1",
     "bcrypt": "^3.0.5",
     "chalk": "^2.4.2",
     "moment": "^2.24.0",
+    "nest-router": "^1.0.9",
     "pg": "^7.9.0",
     "sequelize": "^5.8.6",
     "sequelize-typescript": "^1.0.0-alpha.9",

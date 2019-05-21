@@ -1,10 +1,19 @@
-import { Module } from '@nestjs/common';
-import HealthModule from './health';
-import DatabaseModule from './databases';
+import { Module, MiddlewareConsumer, NestModule, RequestMethod } from '@nestjs/common';
+import HealthModule from './health/index';
+import DatabaseModule from './databases/index';
+import middleware from './middleware/index';
+import ConfiguredRouterModule from './routes';
 
 @Module({
-  imports: [DatabaseModule, HealthModule],
+  imports: [ConfiguredRouterModule, DatabaseModule, HealthModule],
 })
-class ApplicationModule {}
+class ApplicationModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(...middleware).forRoutes({
+      path: '*',
+      method: RequestMethod.ALL,
+    });
+  }
+}
 
 export default ApplicationModule;
