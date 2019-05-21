@@ -1,8 +1,7 @@
 .PHONY: lint
 
 lint:
-	npx prettier --loglevel error 'src/**/*.ts' --write
-	npx tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
+	npx eslint ./src --fix
 
 build:
 	npx tsc
