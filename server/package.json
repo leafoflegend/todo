@@ -9,7 +9,6 @@
     "build-watch": "make build-watch",
     "test": "make test",
     "test-watch": "make test",
-    "pre-push": "make pre-push",
     "dev": "make dev",
     "seed": "make seed",
     "detect-circular": "make detect-circular"
@@ -28,7 +27,6 @@
     "@types/source-map-support": "^0.5.0",
     "chalk": "^2.4.2",
     "faker": "^4.1.0",
-    "husky": "^1.3.1",
     "jest": "^24.1.0",
     "madge": "^3.4.4",
     "nodemon": "^1.18.10",
