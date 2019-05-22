@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import sequelizeProvider from './sequelize';
+import redisProvider from './redis';
 
-const databaseProviders = [sequelizeProvider];
+const databaseProviders = [sequelizeProvider, redisProvider];
 
 @Module({
   providers: [...databaseProviders],

@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { Logger } from '../../../utils';
 import HealthService from './service';
 
 interface HealthResponse {
@@ -7,8 +8,11 @@ interface HealthResponse {
   services: {
     database: boolean;
     server: boolean;
+    redis: boolean;
   };
 }
+
+const l = new Logger('health controller');
 
 @Controller('health')
 class HealthController {
@@ -20,16 +24,24 @@ class HealthController {
 
   @Get()
   private async findAll(): Promise<HealthResponse> {
-    const dbAlive = await this.healthService.checkDbHealth();
+    try {
+      const dbAlive = await this.healthService.checkDbHealth();
+      const redisAlive = await this.healthService.checkRedisHealth();
 
-    return {
-      keys: ['message', 'services'],
-      message: 'I Am Alive.',
-      services: {
-        server: true,
-        database: dbAlive,
-      },
-    };
+      return {
+        keys: ['message', 'services'],
+        message: 'I Am Alive.',
+        services: {
+          server: true,
+          database: dbAlive,
+          redis: redisAlive,
+        },
+      };
+    } catch (e) {
+      l.err('Error checking health of services.', e);
+
+      throw e;
+    }
   }
 }
 

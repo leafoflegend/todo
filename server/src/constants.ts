@@ -14,6 +14,10 @@ const enum RoleTypes {
 
 const CONSTANTS = {
   SEQUELIZE: 'SEQUELIZE',
+  REDIS: 'REDIS',
+  TIMEOUTS: {
+    REDIS: 10000,
+  },
   USER_TYPES: {
     ADMIN: UserTypes.ADMIN,
     LEADER: UserTypes.LEADER,
