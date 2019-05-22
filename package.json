@@ -34,5 +34,11 @@
     "eslint-plugin-react": "^7.13.0",
     "prettier": "^1.17.1",
     "typescript": "^3.4.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "make pre-commit",
+      "pre-push": "npm run pre-push"
+    }
   }
 }

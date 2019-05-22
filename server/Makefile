@@ -23,11 +23,6 @@ test-watch:
 dev:
 	DEV=true npx nodemon -w src
 
-pre-push:
-	make build
-	make test
-	make lint
-
 seed:
 	CLEAR_DB=true SEED_DB=true DEV=true npx nodemon -w src
 
