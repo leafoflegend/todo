@@ -1,5 +1,4 @@
 import { install } from 'source-map-support';
-install();
 import { Logger } from '../../utils';
 import CONSTANTS from '../../constants';
 import Assignment from '../models/assignment';
@@ -9,6 +8,7 @@ import TaskTemplate from '../models/task-template';
 import Team from '../models/team';
 import User from '../models/user';
 import taskDescriptions from '../data/task-description.json';
+install();
 import moment = require('moment');
 
 // @ts-ignore

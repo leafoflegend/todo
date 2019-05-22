@@ -1,9 +1,11 @@
 import chalk from 'chalk';
 
 class Logger {
-  name: string;
-  count: number;
-  constructor(name) {
+  public name: string;
+
+  public count: number;
+
+  public constructor(name) {
     this.name = name;
     this.count = 0;
   }

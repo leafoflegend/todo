@@ -1,12 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 import CONSTANTS from '../../../constants';
 import { Logger } from '../../../utils';
+import { SequelizeProvider } from '../databases/sequelize';
 
 const l = new Logger('health service');
 
 @Injectable()
 class HealthService {
-  constructor(@Inject(CONSTANTS.SEQUELIZE) private readonly SEQUELIZE) {}
+  private readonly SEQUELIZE: SequelizeProvider;
+
+  public constructor(@Inject(CONSTANTS.SEQUELIZE) SEQUELIZE) {
+    this.SEQUELIZE = SEQUELIZE;
+  }
 
   public checkDbHealth = async (): Promise<boolean> => {
     try {

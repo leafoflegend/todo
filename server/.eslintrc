@@ -15,7 +15,8 @@
   ],
   "plugins": [
     "jest",
-    "prettier"
+    "prettier",
+    "json"
   ],
   "rules": {
     "import/prefer-default-export": 0,
@@ -57,6 +58,21 @@
     "react/no-multi-comp": 0,
     "prefer-rest-params": 1,
     "padding-line-between-statements": 1,
-    "lines-between-class-members": 1
-  }
+    "lines-between-class-members": 1,
+    "@typescript-eslint/camelcase": "warn",
+    "no-useless-constructor": "warn",
+    "no-empty-function": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.ts"]
+    }
+  ]
 }

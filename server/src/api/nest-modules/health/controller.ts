@@ -12,7 +12,11 @@ interface HealthResponse {
 
 @Controller('health')
 class HealthController {
-  constructor(private readonly healthService: HealthService) {}
+  private readonly healthService: HealthService;
+
+  public constructor(healthService: HealthService) {
+    this.healthService = healthService;
+  }
 
   @Get()
   private async findAll(): Promise<HealthResponse> {

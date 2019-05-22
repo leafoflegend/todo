@@ -48,123 +48,123 @@ class Task extends Model<Task> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.TEXT,
   })
-  description!: string;
+  public description!: string;
 
   @Column({
     type: DataType.DATE,
   })
-  due_date!: Date;
+  public due_date!: Date;
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   })
-  complete!: boolean;
+  public complete!: boolean;
 
   @Column({
     type: DataType.DATE,
   })
-  completed_date!: Date;
+  public completed_date!: Date;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
     defaultValue: 0,
   })
-  depth!: number;
+  public depth!: number;
 
   @BelongsTo(() => User, 'created_by_id')
-  created_by!: User;
+  public created_by!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
-  created_by_id!: number;
+  public created_by_id!: number;
 
   @BelongsTo(() => User, 'assigned_to_id')
-  assigned_to!: User;
+  public assigned_to!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
-  assigned_to_id!: number;
+  public assigned_to_id!: number;
 
   @BelongsTo(() => User, 'owned_by_id')
-  owned_by!: User;
+  public owned_by!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
-  owned_by_id!: number;
+  public owned_by_id!: number;
 
   @BelongsToMany(() => User, () => UserWatcher)
-  user_watchers!: User[];
+  public user_watchers!: User[];
 
   @BelongsToMany(() => Team, () => TeamWatcher)
-  team_watchers!: Team[];
+  public team_watchers!: Team[];
 
   @BelongsTo(() => Team)
-  owning_team!: Team;
+  public owning_team!: Team;
 
   @ForeignKey(() => Team)
   @Column({
     type: DataType.UUID,
   })
-  team_id!: number;
+  public team_id!: number;
 
   @BelongsToMany(() => User, () => Contributor)
-  contributors!: Contributor[];
+  public contributors!: Contributor[];
 
   @HasMany(() => Contribution)
-  contributions!: Contribution[];
+  public contributions!: Contribution[];
 
   @HasMany(() => Comment)
-  comments!: Comment[];
+  public comments!: Comment[];
 
   @HasMany(() => Task)
-  child_tasks!: Task[];
+  public child_tasks!: Task[];
 
   @BelongsTo(() => Task)
-  parent_task!: Task;
+  public parent_task!: Task;
 
   @ForeignKey(() => Task)
   @Column({
     type: DataType.UUID,
   })
-  parent_task_id!: number;
+  public parent_task_id!: number;
 
   @BelongsTo(() => AssignmentStage)
-  assignment_stage!: AssignmentStage;
+  public assignment_stage!: AssignmentStage;
 
   @ForeignKey(() => AssignmentStage)
   @Column({
     type: DataType.UUID,
   })
-  assignment_stage_id!: number;
+  public assignment_stage_id!: number;
 
   @BelongsTo(() => TaskTemplate)
-  based_on_task_template!: TaskTemplate;
+  public based_on_task_template!: TaskTemplate;
 
   @ForeignKey(() => TaskTemplate)
   @Column({
     type: DataType.UUID,
   })
-  task_template_id!: number;
+  public task_template_id!: number;
 
   private static updateDepth = async (task: Task) => {
     if (task.parent_task_id) {
@@ -203,7 +203,7 @@ class Task extends Model<Task> {
       );
     }
 
-    return await Task.updateDepth(task);
+    return Task.updateDepth(task);
   };
 
   @BeforeUpdate
@@ -211,7 +211,7 @@ class Task extends Model<Task> {
     const attributeId = 'parent_task_id';
 
     if (!task.previous(attributeId) && task.changed(attributeId)) {
-      return await Task.updateDepth(task);
+      return Task.updateDepth(task);
     }
 
     return task;

@@ -1,9 +1,9 @@
 import { install } from 'source-map-support';
-install();
 
 import { dbManager } from './db';
 import setupNest from './api';
 import { Logger } from './utils';
+install();
 
 const l = new Logger('root');
 

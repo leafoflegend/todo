@@ -16,28 +16,28 @@ class Team extends Model<Team> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @BelongsToMany(() => User, () => UserTeam)
-  users!: User[];
+  public users!: User[];
 
   @HasMany(() => Task)
-  owned_tasks!: Task[];
+  public owned_tasks!: Task[];
 
   @HasMany(() => Assignment)
-  assignments!: Assignment[];
+  public assignments!: Assignment[];
 
   @BelongsToMany(() => Task, () => TeamTaskWatcher)
-  watched_tasks!: Task[];
+  public watched_tasks!: Task[];
 
   @BelongsToMany(() => Assignment, () => TeamAssignmentWatcher)
-  assignment_tasks!: Task[];
+  public assignment_tasks!: Task[];
 }
 
 export default Team;

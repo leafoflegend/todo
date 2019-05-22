@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "echo 'Linting Commencing...'"
+    "lint": "make lint",
+    "lint:fix": "make lint-fix"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,11 @@
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-json": "^1.4.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
   }
 }

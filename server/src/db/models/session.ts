@@ -11,10 +11,10 @@ class Session extends Model<Session> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @HasOne(() => User)
-  user!: User;
+  public user!: User;
 }
 
 export default Session;

@@ -12,41 +12,41 @@ class Contribution extends Model<Contribution> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   // TODO: Should be an ENUM
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  type!: string;
+  public type!: string;
 
   // TODO: Could probably be refined...
   @Column({
     type: DataType.BLOB,
     allowNull: false,
   })
-  data!: any;
+  public data!: any;
 
   @BelongsTo(() => Task)
-  task!: Task;
+  public task!: Task;
 
   @ForeignKey(() => Task)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  task_id!: number;
+  public task_id!: number;
 
   @BelongsTo(() => User)
-  user!: User;
+  public user!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  user_id!: number;
+  public user_id!: number;
 }
 
 export default Contribution;

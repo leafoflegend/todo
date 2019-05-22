@@ -12,21 +12,21 @@ class UserAssignmentWatcher extends Model<UserAssignmentWatcher> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @ForeignKey(() => Assignment)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  assignment_id!: number;
+  public assignment_id!: number;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  user_id!: number;
+  public user_id!: number;
 }
 
 export default UserAssignmentWatcher;

@@ -23,44 +23,44 @@ class TaskTemplate extends Model<TaskTemplate> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.TEXT,
     allowNull: false,
   })
-  description!: string;
+  public description!: string;
 
   @HasMany(() => TaskTemplate)
-  child_tasks!: TaskTemplate[];
+  public child_tasks!: TaskTemplate[];
 
   @BelongsTo(() => TaskTemplate)
-  parent_task!: TaskTemplate;
+  public parent_task!: TaskTemplate;
 
   @ForeignKey(() => TaskTemplate)
   @Column({
     type: DataType.UUID,
   })
-  parent_task_id!: number;
+  public parent_task_id!: number;
 
   @HasMany(() => Task)
-  created_tasks!: Task[];
+  public created_tasks!: Task[];
 
   @BelongsTo(() => Stage)
-  stage!: Stage;
+  public stage!: Stage;
 
   @ForeignKey(() => Stage)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  stage_id!: number;
+  public stage_id!: number;
 
   public createTask = async (taskObj: {
     stage: AssignmentStage;
@@ -115,7 +115,7 @@ class TaskTemplate extends Model<TaskTemplate> {
         );
       }
 
-      return await toBeTask.save();
+      return toBeTask.save();
     } catch (e) {
       // TODO: Better error handling.
       throw e;

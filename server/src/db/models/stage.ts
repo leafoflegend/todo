@@ -21,34 +21,34 @@ class Stage extends Model<Stage> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  description!: string;
+  public description!: string;
 
   @BelongsTo(() => Process)
-  process!: Process;
+  public process!: Process;
 
   @ForeignKey(() => Process)
   @Column({
     type: DataType.UUID,
   })
-  process_id!: number;
+  public process_id!: number;
 
   @HasMany(() => AssignmentStage)
-  assignment_stages!: AssignmentStage[];
+  public assignment_stages!: AssignmentStage[];
 
   @HasMany(() => TaskTemplate)
-  templated_tasks!: TaskTemplate[];
+  public templated_tasks!: TaskTemplate[];
 }
 
 export default Stage;

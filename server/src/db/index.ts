@@ -1,3 +1,4 @@
+import { Sequelize } from 'sequelize-typescript';
 import db from './db';
 import Assignment from './models/assignment';
 import AssignmentStage from './models/assignment-stage';
@@ -12,7 +13,6 @@ import User from './models/user';
 import UserTeam from './models/user-team';
 import { Logger } from '../utils';
 import { seedData } from './utils';
-import { Sequelize } from 'sequelize-typescript';
 
 const l = new Logger('root db');
 
@@ -29,9 +29,10 @@ const setupDb = (force: boolean = false, seed: boolean = false): Promise<Sequeli
         l.info('Successfully connected to DB.');
         if (!seed) {
           res(db);
-        } else {
-          return seedData();
+          return false;
         }
+
+        return seedData();
       })
       .then(() => {
         if (seed) l.info('Seeding operation completed.');
@@ -45,20 +46,22 @@ const setupDb = (force: boolean = false, seed: boolean = false): Promise<Sequeli
 };
 
 class DBManager {
-  initialized: boolean;
-  db: null | Sequelize;
-  constructor() {
+  private initialized: boolean;
+
+  private internalDb: null | Sequelize;
+
+  public constructor() {
     this.initialized = false;
-    this.db = null;
+    this.internalDb = null;
   }
 
-  setup = async (force: boolean = false, seed: boolean = false): Promise<Sequelize> => {
-    if (this.db) return this.db;
+  public setup = async (force: boolean = false, seed: boolean = false): Promise<Sequelize> => {
+    if (this.internalDb) return this.internalDb;
     try {
-      const db = await setupDb(force, seed);
-      this.db = db;
+      const resolvedDb = await setupDb(force, seed);
+      this.internalDb = resolvedDb;
 
-      return db;
+      return this.internalDb;
     } catch (e) {
       l.err('DB Manager Failed to Initialize.', e);
       throw new Error('Could not initialize DB');

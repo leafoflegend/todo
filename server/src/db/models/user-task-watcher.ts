@@ -12,21 +12,21 @@ class UserTaskWatcher extends Model<UserTaskWatcher> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @ForeignKey(() => Task)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  task_id!: number;
+  public task_id!: number;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  user_id!: number;
+  public user_id!: number;
 }
 
 export default UserTaskWatcher;

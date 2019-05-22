@@ -8,7 +8,6 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import { Moment } from 'moment';
-import moment = require('moment');
 import Assignment from './assignment';
 import AssignmentStage from './assignment-stage';
 import Stage from './stage';
@@ -16,6 +15,7 @@ import Team from './team';
 import User from './user';
 import TaskTemplate from './task-template';
 import { Logger } from '../../utils';
+import moment = require('moment');
 
 const l = new Logger('process model');
 
@@ -29,41 +29,41 @@ class Process extends Model<Process> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  description!: string;
+  public description!: string;
 
   @Column({
     type: DataType.ARRAY(DataType.UUID),
     allowNull: false,
     defaultValue: [],
   })
-  order_of_stages!: number[];
+  public order_of_stages!: number[];
 
   @BelongsTo(() => Team)
-  team!: Team;
+  public team!: Team;
 
   @ForeignKey(() => Team)
   @Column({
     type: DataType.UUID,
   })
-  team_id!: number;
+  public team_id!: number;
 
   @HasMany(() => Assignment)
-  assignments!: Assignment[];
+  public assignments!: Assignment[];
 
   @HasMany(() => Stage)
-  stages!: Stage[];
+  public stages!: Stage[];
 
   public createAssignment = async (assignmentObj: {
     name: string;

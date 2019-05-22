@@ -25,74 +25,74 @@ class Assignment extends Model<Assignment> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  description!: string;
+  public description!: string;
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   })
-  complete!: boolean;
+  public complete!: boolean;
 
   @Column({
     type: DataType.DATE,
   })
-  completed_date!: Date;
+  public completed_date!: Date;
 
   @Column({
     type: DataType.DATE,
   })
-  due_date!: Date;
+  public due_date!: Date;
 
   @HasMany(() => AssignmentStage)
-  assignment_stages!: AssignmentStage[];
+  public assignment_stages!: AssignmentStage[];
 
   @BelongsTo(() => Process)
-  process!: Process;
+  public process!: Process;
 
   @ForeignKey(() => Process)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  process_id!: number;
+  public process_id!: number;
 
   @BelongsTo(() => User)
-  user!: User;
+  public user!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  assigned_user_id!: number;
+  public assigned_user_id!: number;
 
   @BelongsTo(() => Team)
-  team!: Team;
+  public team!: Team;
 
   @ForeignKey(() => Team)
   @Column({
     type: DataType.UUID,
   })
-  assigned_team_id!: Team;
+  public assigned_team_id!: Team;
 
   @BelongsToMany(() => User, () => UserWatcher)
-  user_watchers!: User[];
+  public user_watchers!: User[];
 
   @BelongsToMany(() => Team, () => TeamWatcher)
-  team_watchers!: Team[];
+  public team_watchers!: Team[];
 }
 
 export default Assignment;

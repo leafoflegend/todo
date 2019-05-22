@@ -17,16 +17,16 @@ const createSalt: CreateSalt = () =>
 type CreateHash = (password: string, salt: string) => Promise<string>;
 const createHash: CreateHash = (password, salt) =>
   new Promise((res, rej) => {
-    hash(password, salt, (err, hash) => {
+    hash(password, salt, (err, genHash) => {
       if (err) rej(err);
-      else res(hash);
+      else res(genHash);
     });
   });
 
-type ComparePassAndHash = (password: string, hash: string) => Promise<boolean>;
-const comparePassAndHash: ComparePassAndHash = (password, hash) =>
+type ComparePassAndHash = (password: string, genHash: string) => Promise<boolean>;
+const comparePassAndHash: ComparePassAndHash = (password, genHash) =>
   new Promise((res, rej) => {
-    compare(password, hash, (err, same) => {
+    compare(password, genHash, (err, same) => {
       if (err) rej(err);
       res(same);
     });

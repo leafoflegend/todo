@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import CONSTANTS from '../../../constants';
 import { dbManager, models } from '../../../db';
 
-interface SequelizeProvider {
+export interface SequelizeProvider {
   db: Sequelize;
   models: typeof models;
 }

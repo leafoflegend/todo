@@ -8,7 +8,7 @@ import ConfiguredRouterModule from './routes';
   imports: [ConfiguredRouterModule, DatabaseModule, HealthModule],
 })
 class ApplicationModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
+  public configure(consumer: MiddlewareConsumer) {
     consumer.apply(...middleware).forRoutes({
       path: '*',
       method: RequestMethod.ALL,

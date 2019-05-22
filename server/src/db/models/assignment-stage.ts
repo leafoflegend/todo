@@ -21,30 +21,30 @@ class AssignmentStage extends Model<AssignmentStage> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @BelongsTo(() => Stage)
-  stage!: Stage;
+  public stage!: Stage;
 
   @ForeignKey(() => Stage)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  stage_id!: number;
+  public stage_id!: number;
 
   @BelongsTo(() => Assignment)
-  assignment!: Assignment;
+  public assignment!: Assignment;
 
   @ForeignKey(() => Assignment)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  assignment_id!: number;
+  public assignment_id!: number;
 
   @HasMany(() => Task)
-  tasks!: Task[];
+  public tasks!: Task[];
 }
 
 export default AssignmentStage;

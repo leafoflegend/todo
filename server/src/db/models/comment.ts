@@ -20,44 +20,44 @@ class Comment extends Model<Comment> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  content!: string;
+  public content!: string;
 
   @BelongsTo(() => User)
-  user!: User;
+  public user!: User;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  user_id!: number;
+  public user_id!: number;
 
   @HasMany(() => Comment, 'parent_comment_id')
-  child_comments!: Comment[];
+  public child_comments!: Comment[];
 
   @BelongsTo(() => Comment, 'parent_comment_id')
-  parent_comment!: Comment;
+  public parent_comment!: Comment;
 
   @ForeignKey(() => Comment)
   @Column({
     type: DataType.UUID,
   })
-  parent_comment_id!: number;
+  public parent_comment_id!: number;
 
   @BelongsTo(() => Task)
-  task!: Task;
+  public task!: Task;
 
   @ForeignKey(() => Task)
   @Column({
     type: DataType.UUID,
   })
-  task_id!: number;
+  public task_id!: number;
 }
 
 export default Comment;

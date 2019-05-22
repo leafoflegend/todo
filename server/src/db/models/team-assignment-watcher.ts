@@ -12,21 +12,21 @@ class TeamAssignmentWatcher extends Model<TeamAssignmentWatcher> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @ForeignKey(() => Assignment)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  assignment_id!: number;
+  public assignment_id!: number;
 
   @ForeignKey(() => Team)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  team_id!: number;
+  public team_id!: number;
 }
 
 export default TeamAssignmentWatcher;

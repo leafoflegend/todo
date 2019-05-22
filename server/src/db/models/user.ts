@@ -29,7 +29,7 @@ import Session from './session';
 const { ADMIN, LEADER, READONLY, STANDARD } = CONSTANTS.USER_TYPES;
 
 class AuthenticationError extends Error {
-  constructor(message) {
+  public constructor(message) {
     super(message);
     this.name = 'AuthenticationError';
   }
@@ -53,13 +53,13 @@ class User extends Model<User> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  id!: number;
+  public id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  public name!: string;
 
   @Column({
     type: DataType.STRING,
@@ -69,73 +69,73 @@ class User extends Model<User> {
     },
     unique: true,
   })
-  email!: string;
+  public email!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  password!: string;
+  public password!: string;
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   })
-  email_verified!: string;
+  public email_verified!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  phone_number!: string;
+  public phone_number!: string;
 
   @Column({
     type: DataType.ENUM<UserTypes>(ADMIN, LEADER, READONLY, STANDARD),
     allowNull: false,
     defaultValue: STANDARD,
   })
-  type!: UserTypes;
+  public type!: UserTypes;
 
   @BelongsTo(() => Session)
-  session!: Session;
+  public session!: Session;
 
   @ForeignKey(() => Session)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  session_id!: number;
+  public session_id!: number;
 
   @BelongsToMany(() => Team, () => UserTeam)
-  teams!: Team[];
+  public teams!: Team[];
 
   @BelongsToMany(() => Task, () => Contributor)
-  contributed_to_tasks!: Task[];
+  public contributed_to_tasks!: Task[];
 
   @HasMany(() => Contribution)
-  contributions!: Contribution[];
+  public contributions!: Contribution[];
 
   @HasMany(() => Task, 'created_by_id')
-  created_tasks!: Task[];
+  public created_tasks!: Task[];
 
   @HasMany(() => Task, 'owned_by_id')
-  owned_tasks!: Task[];
+  public owned_tasks!: Task[];
 
   @HasMany(() => Task, 'assigned_to_id')
-  assigned_tasks!: Task[];
+  public assigned_tasks!: Task[];
 
   @HasMany(() => Comment)
-  comments!: Comment[];
+  public comments!: Comment[];
 
   @HasMany(() => Assignment)
-  assignments!: Assignment[];
+  public assignments!: Assignment[];
 
   @BelongsToMany(() => Task, () => UserTaskWatcher)
-  watched_tasks!: Task[];
+  public watched_tasks!: Task[];
 
   @BelongsToMany(() => Assignment, () => UserAssignmentWatcher)
-  watched_assignments!: Assignment[];
+  public watched_assignments!: Assignment[];
 
   @BeforeCreate
   private static hashPassword = async (user: User): Promise<User> => {
