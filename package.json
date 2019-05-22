@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "make lint",
-    "lint:fix": "make lint-fix"
+    "lint:fix": "make lint-fix",
+    "pre-push": "make pre-push",
+    "pre-commit": "make pre-commit"
   },
   "repository": {
     "type": "git",
