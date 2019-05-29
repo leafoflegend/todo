@@ -12,7 +12,9 @@ const sequelizeProvider = {
   provide: CONSTANTS.REDIS,
   useFactory: async (): Promise<RedisProvider> => {
     try {
-      const resolvedRedisClient = await redis.createClient();
+      const resolvedRedisClient = await redis.createClient({
+        host: process.env.REDIS_HOST || 'localhost',
+      });
 
       return {
         redis: resolvedRedisClient,

@@ -2,8 +2,6 @@ import { install } from 'source-map-support';
 import dotenv from 'dotenv';
 import path from 'path';
 
-import { dbManager } from './db';
-import setupNest from './api';
 import { Logger } from './utils';
 
 const l = new Logger('root');
@@ -33,6 +31,11 @@ if (!process.env.DEV) {
 }
 
 install();
+
+// eslint-disable-next-line
+import { dbManager } from './db';
+// eslint-disable-next-line
+import setupNest from './api';
 
 const bootstrapApplication = async () => {
   try {

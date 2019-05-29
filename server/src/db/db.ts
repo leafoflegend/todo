@@ -1,7 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
 
-console.log('ENV: ', JSON.stringify(process.env));
-
 // @ts-ignore
 const connection = new Sequelize({
   database: process.env.DATABASE_NAME || 'todobe',
