@@ -22,3 +22,9 @@ deploy:
 dev:
 	@echo "\033[0;36mDev Build Starting...\033[0m\n"
 	@(cd ./server && make dev)
+
+start-docker:
+	@docker-compose build && docker-compose up
+
+stop-docker:
+	@docker-compose down
