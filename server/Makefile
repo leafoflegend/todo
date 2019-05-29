@@ -23,8 +23,11 @@ test-watch:
 dev:
 	@DEV=true npx nodemon -w src
 
+start:
+	@node js/src/index.js
+
 seed:
 	@CLEAR_DB=true SEED_DB=true DEV=true npx nodemon -w src
 
 detect-circular:
-	@npx madge --circular js/index.js
+	@npx madge --circular js/src/index.js

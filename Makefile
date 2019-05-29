@@ -14,3 +14,7 @@ pre-commit:
 pre-push:
 	@echo "\033[0;36mPush Quality Check Commencing...\033[0m\n"
 	@(cd ./server && make build && make test && make lint)
+
+deploy:
+	@echo "\033[0;36mDeploy Beginning...\033[0m\n"
+	@(cd ./server && make build && make start)

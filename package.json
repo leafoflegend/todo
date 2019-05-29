@@ -7,7 +7,8 @@
     "lint": "make lint",
     "lint:fix": "make lint-fix",
     "pre-push": "make pre-push",
-    "pre-commit": "make pre-commit"
+    "pre-commit": "make pre-commit",
+    "deploy": "make deploy"
   },
   "repository": {
     "type": "git",
