@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import CONSTANTS from '../../../constants';
-import { dbManager, models } from '../../../db';
+import { DBManager, models } from '../../../db';
 import { Logger } from '../../../utils';
 
 export interface SequelizeProvider {
@@ -14,6 +14,7 @@ const sequelizeProvider = {
   provide: CONSTANTS.SEQUELIZE,
   useFactory: async (): Promise<SequelizeProvider> => {
     try {
+      const dbManager = new DBManager();
       const db = await dbManager.setup();
 
       return {

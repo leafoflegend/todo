@@ -18,3 +18,7 @@ pre-push:
 deploy:
 	@echo "\033[0;36mDeploy Beginning...\033[0m\n"
 	@(cd ./server && make build && make start)
+
+dev:
+	@echo "\033[0;36mDev Build Starting...\033[0m\n"
+	@(cd ./server && make dev)
