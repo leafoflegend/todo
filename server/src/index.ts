@@ -18,8 +18,11 @@ const bootstrapApplication = async () => {
     l.info('Application bootstrapped.');
   } catch (e) {
     l.err('Failed to bootstrap application.', e);
+    throw e;
   }
 };
 
 configureApplication();
-bootstrapApplication();
+const applicationBootstrappedPromise = bootstrapApplication();
+
+export default applicationBootstrappedPromise;

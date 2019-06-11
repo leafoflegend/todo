@@ -1,4 +1,4 @@
-.PHONY: lint
+.PHONY: lint lint-fix
 
 lint:
 	@npx eslint "src/**" --quiet

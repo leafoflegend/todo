@@ -7,6 +7,11 @@
   "env": {
     "jest": true
   },
+  "globals": {
+    "navigator": "readonly",
+    "window": "readonly",
+    "document": "readonly"
+  },
   "extends": [
     "eslint-config-airbnb",
     "plugin:@typescript-eslint/recommended",
@@ -72,7 +77,7 @@
   },
   "overrides": [
     {
-      "files": ["src/**/*.ts"]
+      "files": ["client/**/*.ts", "server/**/*.ts", "client/**/*.tsx"]
     }
   ]
 }
