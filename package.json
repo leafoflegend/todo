@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "make bootstrap",
     "lint": "make lint",
     "lint:fix": "make lint-fix",
     "pre-push": "make pre-push",

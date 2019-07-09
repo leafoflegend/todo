@@ -1,5 +1,11 @@
 .PHONY: lint
 
+bootstrap:
+	@echo "\033[0;36mBootstrapping...\033[0m\n"
+	@npm i
+	@(cd ./server; npm i)
+	@(cd ./client; npm i)
+
 lint:
 	@echo "\033[0;36mLinting Commencing...\033[0m\n"
 	@(cd ./server; npm run lint;)
