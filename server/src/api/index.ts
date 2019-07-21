@@ -6,7 +6,7 @@ import ApplicationModule from './nest-modules';
 import { UnwrapPromise } from '../../types/utility';
 
 const l = new Logger('nest root');
-const PORT = typeof process.env.PORT === 'string' ? process.env.PORT : 3000;
+const PORT = typeof process.env.PORT === 'string' ? parseInt(process.env.PORT) : 3000;
 
 type NestApplication = UnwrapPromise<ReturnType<typeof NestFactory.create>>;
 

@@ -1,33 +1,39 @@
-.PHONY: lint lint-fix
+.PHONY: lint lint-fix test test-watch detect-circular seed
+.SILENT: lint lint-fix build build-watch test test-watch dev start seed detect-circular
+
+NM = ./node_modules/.bin/
 
 lint:
-	@npx eslint "src/**" --quiet
-	@echo "\033[1;32mSuccess Linting Server!\033[0m\n"
+	.$(NM)eslint "src/**" --quiet
+	echo "\033[1;32mSuccess Linting Server!\033[0m\n"
 
 lint-fix:
-	@npx eslint "src/**" --fix --quiet
-	@echo "\033[1;32mSuccess Linting and Fixing Server!\033[0m\n"
+	.$(NM)eslint "src/**" --fix --quiet
+	echo "\033[1;32mSuccess Linting and Fixing Server!\033[0m\n"
 
 build:
-	@npx tsc
+	$(NM)tsc
 
 build-watch:
-	@npx tsc -w --passWithNoTests
+	$(NM)tsc -w
 
 test:
-	@npx jest
+	NODE_ENV=test $(NM)jest
 
 test-watch:
-	@npx jest --watch
+	NODE_ENV=test $(NM)jest --watch
+
+docker-dev:
+	NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w src
 
 dev:
-	@DEV=true npx nodemon -w src
+	NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w src
 
 start:
-	@node js/src/index.js
+	NODE_ENV=production PORT=8080 node js/src/index.js
 
 seed:
-	@CLEAR_DB=true SEED_DB=true DEV=true npx nodemon -w src
+	NODE_ENV=development CLEAR_DB=true SEED_DB=true LOCAL_DEV=true $(NM)nodemon -w src
 
 detect-circular:
-	@npx madge --circular js/src/index.js
+	$(NM)madge --circular js/src/index.js

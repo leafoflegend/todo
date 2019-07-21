@@ -10,10 +10,17 @@
 4. Install [redis](https://redis.io/download) and [postgres](https://www.postgresql.org/download/) - for local development.
 5. At this point you should be able to run `make dev`, `npm run dev`, or `yarn dev` in the root directory of the project.
 
+#### **OR**
+
+1. Install [Docker](https://www.docker.com/products/docker-desktop)
+2. Run `npm run bootstrap && npm run start:docker-development`
+
+### More Usage
+**Read the Makefile**
+
 ### Caveats
 
 - `.env`
-- `Docker` currently is for production, we'd love to get it working with mounted drives for dev.
 
 ### Things to Do
 

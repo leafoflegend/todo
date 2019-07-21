@@ -7,12 +7,16 @@
     "bootstrap": "make bootstrap",
     "lint": "make lint",
     "lint:fix": "make lint-fix",
-    "pre-push": "make pre-push",
+    "ci": "make ci",
     "pre-commit": "make pre-commit",
     "deploy": "make deploy",
     "dev": "make dev",
-    "start:docker": "make start-docker",
-    "stop:docker": "make stop-docker"
+    "start:docker-production": "make start-docker-production",
+    "stop:docker-production": "make stop-docker-production",
+    "start:docker-development": "make start-docker-development",
+    "stop:docker-development": "make stop-docker-development",
+    "start:docker-test": "make start-docker-test",
+    "stop:docker-test": "make stop-docker-test"
   },
   "repository": {
     "type": "git",
@@ -44,7 +48,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run pre-commit",
-      "pre-push": "npm run pre-push"
+      "pre-push": "npm run ci"
     }
   },
   "dependencies": {}
