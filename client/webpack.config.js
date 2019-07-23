@@ -8,10 +8,9 @@ module.exports = {
   context: path.resolve(__dirname),
   entry: {
     app: './js/index.js',
-    print: './js/print.js'
   },
   // TODO: This needs to be an env variable.
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   devtool: 'eval-source-map',
   plugins: [
     new CleanWebpackPlugin(),

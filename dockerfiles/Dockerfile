@@ -1,0 +1,24 @@
+FROM node:12.3
+
+RUN mkdir /tmp/server && mkdir /tmp/client && mkdir -p /usr/src/app/ && mkdir -p /usr/src/app/server/ && mkdir -p /usr/src/app/client/
+
+COPY package.json /tmp/package.json
+WORKDIR tmp
+RUN npm install
+RUN cp -a /tmp/node_modules /usr/src/app/node_modules/
+
+COPY server/package.json /tmp/server/package.json
+WORKDIR /tmp/server
+RUN npm install
+RUN cp -a /tmp/server/node_modules /usr/src/app/server/node_modules/
+
+COPY client/package.json /tmp/client/package.json
+WORKDIR /tmp/client
+RUN npm install
+RUN cp -a /tmp/client/node_modules /usr/src/app/client/node_modules/
+
+# Working directory for application
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+EXPOSE 8080
+CMD ["make", "deploy"]

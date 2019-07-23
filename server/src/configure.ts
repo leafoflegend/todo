@@ -6,15 +6,21 @@ import { Logger } from './utils';
 
 const l = new Logger('configure');
 
-const configureApplication = (): void => {
-  if (!process.env.DEV) {
-    // TODO: Switch this to recursively searching upwards. This seems off because of what the file structure looks like when we build the TS.
-    const envPath = path.join(__dirname, '../../..', './.env');
+const configureApplication = (startPath: string = '../../..', tries: number = 0): void => {
+  // TODO: Switch this to recursively searching upwards. This seems off because of what the file structure looks like when we build the TS.
+  if (!process.env.LOCAL_DEV && !process.env.CI) {
+    const envPath = path.join(__dirname, startPath, './.env');
     l.info('Installing .env variables.');
     const envConfigResult = dotenv.config({ path: envPath });
 
     if (envConfigResult.error) {
-      l.err('Error configuring .env file.', envConfigResult.error);
+      if (tries === 0) {
+        l.info('Taking second attempt at locating .env file.');
+        configureApplication('../..', tries + 1);
+      } else {
+        l.err('Cannot find .env file after multiple attempts.', envConfigResult.error);
+        process.exit(1);
+      }
     } else {
       l.info('Parsed .env variables added: ', JSON.stringify(envConfigResult.parsed));
       const injectedStatuses = Object.keys(envConfigResult.parsed).map(envKey => {

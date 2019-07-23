@@ -14,10 +14,12 @@ services:
       POSTGRES_USER: "${DATABASE_USERNAME}"
       POSTGRES_DB: "${DATABASE_NAME}"
   web:
-    build: .
+    build:
+      context: ..
+      dockerfile: dockerfiles/TestDockerfile
     init: true
     ports:
-      - "3000:3000"
+      - "8080:8080"
     links:
       - redis
       - db
