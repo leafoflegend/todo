@@ -8,5 +8,7 @@ notifications:
   email:
     on_success: always
     on_failure: always
+env:
+  - DOCKER_COMPOSE_VERSION=1.23.2
 script:
   - npm run start:docker-ci
