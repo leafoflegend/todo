@@ -4,8 +4,8 @@
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
 	npm i
-	(cd ./server; npm i)
-	(cd ./client; npm i)
+	(cd ./server; npm ci)
+	(cd ./client; npm ci)
 
 lint:
 	echo "\033[0;36mLinting Commencing...\033[0m\n"
@@ -20,10 +20,16 @@ lint-fix:
 pre-commit:
 	make lint
 
+client-ci:
+	(cd ./server && make lint && make build && make test)
+
+server-ci:
+	(cd ./client && make lint && make build && make test)
+
 ci:
 	echo "\033[0;36mCI Commencing...\033[0m\n"
-	(cd ./server && make lint && make build && make test)
-	(cd ./client && make lint && make build && make test)
+	make client-ci
+	make server-ci
 	echo "\033[0;36mCI Complete\033[0m\n"
 
 deploy:
@@ -56,11 +62,11 @@ start-docker-development: build-docker-development
 stop-docker-development:
 	docker-compose -f dockerfiles/compose-development.yml down
 
-build-docker-test:
-	docker-compose -f dockerfiles/compose-test.yml build
+build-docker-ci:
+	docker-compose -f dockerfiles/compose-ci.yml build
 
-start-docker-test: build-docker-test
-	docker-compose -f dockerfiles/compose-test.yml up --abort-on-container-exit
+start-docker-ci: build-docker-ci
+	docker-compose -f dockerfiles/compose-ci.yml up --abort-on-container-exit
 
-stop-docker-test:
-	docker-compose -f dockerfiles/compose-test.yml down
+stop-docker-ci:
+	docker-compose -f dockerfiles/compose-ci.yml down

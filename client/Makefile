@@ -13,7 +13,7 @@ lint-fix:
 
 build:
 	$(NM)tsc
-	NODE_ENV=production npx --no-install webpack js/index.js -o ./dist/bundle.js
+	NODE_ENV=production npx --no-install webpack js/index.js --mode="production" -o ./dist/bundle.js
 
 dev:
 	$(NM)tsc -w & NODE_ENV=development $(NM)webpack js/index.js -o ./dist/bundle.js --watch

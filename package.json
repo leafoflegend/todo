@@ -15,8 +15,8 @@
     "stop:docker-production": "make stop-docker-production",
     "start:docker-development": "make start-docker-development",
     "stop:docker-development": "make stop-docker-development",
-    "start:docker-test": "make start-docker-test",
-    "stop:docker-test": "make stop-docker-test"
+    "start:docker-ci": "make start-docker-ci",
+    "stop:docker-ci": "make stop-docker-ci"
   },
   "repository": {
     "type": "git",
