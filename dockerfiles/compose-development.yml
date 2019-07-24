@@ -17,6 +17,7 @@ services:
     build:
       context: ..
       dockerfile: dockerfiles/DevelopmentDockerfile
+    image: "todo-development"
     init: true
     volumes:
       - "../server/src:/usr/src/app/server/src"

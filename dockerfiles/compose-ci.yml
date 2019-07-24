@@ -16,7 +16,8 @@ services:
   web:
     build:
       context: ..
-      dockerfile: dockerfiles/TestDockerfile
+      dockerfile: dockerfiles/CIDockerfile
+    image: "todo-test"
     init: true
     ports:
       - "8080:8080"

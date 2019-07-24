@@ -6,12 +6,19 @@ import configureApplication from './configure';
 const l = new Logger('root');
 
 const bootstrapApplication = async () => {
+  const dbManager = new DBManager();
+
+  dbManager
+    .setup(!!process.env.CLEAR_DB, !!process.env.SEED_DB)
+    .then(() => {
+      l.suc('Database initialized.');
+    })
+    .catch(e => {
+      l.err('Database failed to initialize.', e);
+    });
+
   try {
     l.info('Bootstrapping application...');
-
-    const dbManager = new DBManager();
-
-    await dbManager.setup(!!process.env.CLEAR_DB, !!process.env.SEED_DB);
 
     await setupNest();
 

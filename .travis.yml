@@ -1,0 +1,12 @@
+dist: trusty
+language: node_js
+node_js:
+  - "12"
+services:
+  - docker
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+script:
+  - npm run start:docker-ci

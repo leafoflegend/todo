@@ -17,6 +17,7 @@ services:
     build:
       context: ..
       dockerfile: dockerfiles/Dockerfile
+    image: "todo"
     init: true
     ports:
       - "8080:8080"
