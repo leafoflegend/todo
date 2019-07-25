@@ -1,22 +1,34 @@
 dist: trusty
 language: node_js
 node_js:
-  - "12"
+- '12'
 services:
-  - docker
-
+- docker
 env:
+  matrix:
   - DOCKER_COMPOSE_VERSION=1.23.2
-
 before_install:
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
 before_script:
-  - sudo /etc/init.d/postgresql stop
+- sudo /etc/init.d/postgresql stop
 script:
-  - npm run start:docker-ci
+- npm run start:docker-ci
 notifications:
   email:
     on_success: always
     on_failure: always
+
+deploy:
+  on:
+    branch: master
+  skip_cleanup: true
+  provider: s3
+  access_key_id:
+    secure: qVF09VkhgC2ng4s2qVFhVrQbgZHFzfC0jxmrFjUDqfG3mNnLa5YTRQiRccnhT8X3+J8hPgXXaOsgCfGoY9UQW2nyv1T+7JeAfrTGB6yo6lPgtFQdWP25aOlOqCMFZOQhqo4Y9RudNjFDZWAdZtcB2Y1JKblvx3HHHUmkxkdUAOIo1aMA6CuVjrxkPZp3E685Q7/zuHz7LUQ26Qy18gAUh7752b+5h3TT8UxskSbPbUACzMVUU52pl9wVPNXZdeervoOACzfmyc4hpvpaM3PLhXwZ/BEeTxah5OnFZreVpXnoB1K6LKc7rXppj5zCMei7UgzIbmmfb8ZdLczmONuyC6VM6+VRjJ40HJ+lMtZZPWiyqmFbQs01g4iX4VB1Wz0FWSs9+sdfveEk60h6DF0256C2BGVUVHusRBvt9OLcN3cLriblbb0oyp0fIzSjCSIK13ly6ayQCj3cRfUKYe1GOImVYtlbIBIX8wG5QvOLqzJ7HnT0RcucokOy8UCrNkzh7EgpCmaVDY+1IMmwYXtM1LOJbDNPDu0+d7rcp82Ole34LSXLAKBpRYSjpzPviU+Tq6374HAqlM7nU1hBhUaMCOgKwtQEnwaudzm3OOBquqar/imCY22E1ucf3AzikziUq1vdk/C8/6OjjCwp/LY6pv8mAvQvNhupMFlH90zPdLU=
+  secret_access_key:
+    secure: J4tzqJYboYFzGD5FPJoBgmb1E5/O93Z9pRLNQcP3t0fKD+z7PDFe20ozMfVG22aJCUqqrj5zuKUpqHUWwwIReGOuNGrxdmx2CYvnakMywdKhOcsezAs69VSv+kHzBzcU9jXFWCc4iYx5cKRbT2LZhd/D5K5iI4PZb6SL8Ur2gngTtEi7vcD3LmOxGs6c1iLG/RSs4Q4VjKb2KmEg6VOV8P+Nfd2+5NxUPNXYocu3Io1waePWlqlHJ4iZw4MadZ/LooeNxlWlPXx2LRIrblwGhq+efkewJs9wUOn0awxQCUFSTEa25JUIkMj4etBxUTsRa5sR8O7PDULOWUbPMLsnt0YLgwN8ujLAj5whrfqv2QmE1Pa4FxSfd0Ro2tPx47xzeQmYjZTec9exGp2EeLEeR3jHyHBcr/YgNVVtLog15yqKsUBeXXtNn2MIwHtBcxg6oZxexk27OaWebxI922q/d0itwXo9PjGAIIMc51CMwSqoVutppxtfCtcFzp1F/4+e65lrMGfCuC36EnZHbu4XluJ85z3RtCU/iib5sX8sYwY7hFSHMeCgHUwbWYUhD3b5l7N/ZMirMU+Vhguzq/xvBORigaP19TWw7KpFuEc8Cs7yC4Y11IyIAm4oxPUcxrtTTBHjUVuPnWtlgqs7Q2lF69uiVjNkH9Nr0xjTmPhfYJg=
+  bucket: eliot-szwajkowski-artifacts
+
