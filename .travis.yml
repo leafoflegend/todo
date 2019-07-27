@@ -16,12 +16,12 @@ before_script:
 - sudo /etc/init.d/postgresql stop
 script:
 - npm run start:docker-ci
+- npm run stop:docker-ci
+- npm run build
 notifications:
   email:
     on_success: always
     on_failure: always
-after_script:
-- npm run stop:docker-ci
 deploy:
   provider: heroku
   api_key:
@@ -30,4 +30,5 @@ deploy:
   on:
     branch: master
   skip_cleanup: true
+  local_dir: dist
 
