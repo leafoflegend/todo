@@ -19,7 +19,12 @@ const bootstrapNest = (): Promise<NestApplication> => {
         .then(app => {
           l.info('Nest Application successfully created.');
 
-          app.useStaticAssets(join(__dirname, '..', '..', '..', './client/dist'));
+          const devResources = join(__dirname, '..', '..', '..', './client/dist');
+          const prodResources = join(__dirname, '..', '..', './dist');
+
+          app.useStaticAssets(
+            process.env.NODE_ENV === 'development' ? devResources : prodResources,
+          );
 
           nestApp = app;
 
