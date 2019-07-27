@@ -1,5 +1,5 @@
 .PHONY: lint lint-fix
-.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test build start clean
+.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test build start clean build-artifacts
 
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
@@ -37,6 +37,10 @@ deploy: bootstrap build
 	echo "\033[0;36mDeploy Beginning...\033[0m\n"
 	make start
 
+deploy-no-install: build
+	echo "\033[0;36mDeploy Beginning...\033[0m\n"
+	make start
+
 dev:
 	echo "\033[0;36mDev Build Starting...\033[0m\n"
 	(cd ./server && make dev) & (cd ./client && make dev)
@@ -44,15 +48,18 @@ dev:
 clean:
 	rm -rf dist
 
-build: clean
-	echo "\033[0;36mBuild Commencing...\033[0m\n"
-	(cd ./client && make build)
-	(cd ./server && make build)
+build-artifacts: clean
 	mkdir -p dist
 	cp -R ./client/dist ./dist/dist
 	cp -R ./server/js/src ./dist/src
 	cp -R ./server/node_modules ./dist/node_modules
 	cp deploy.json ./dist/package.json
+
+build:
+	echo "\033[0;36mBuild Commencing...\033[0m\n"
+	(cd ./client && make build)
+	(cd ./server && make build)
+	make build-artifacts
 	echo "\033[1;32mBuild Complete\033[0m\n"
 
 start:
