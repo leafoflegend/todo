@@ -20,6 +20,14 @@ notifications:
   email:
     on_success: always
     on_failure: always
-
 after_script:
-  - npm run stop:docker-ci
+- npm run stop:docker-ci
+deploy:
+  provider: heroku
+  api_key:
+    secure: VPNIu2WtRBCrexDjL64NOI8D3xmbrSmafpse1bJHhe9eUSc0o/5voezNeGwOKLflB+QGi1YzScgSEzfYRfBOmtwUpqfnswGqkPU9MUD2AfxIls/8HLzgw2qeTDXIeV7GtpoNVf6pfSOOB4HapYmby8U8SrCpd3lG3HKTrSd9X9Z213cjsxp7v5WbsOAR3LVK6MZ9k0b+bC3GNzYrvXFhPp1iaKQb2DeZEc/bAN909v1VAOe0WhULuOWh94qpCpbLLpwkYUQMYs2i2iEUsoJSBXFcIHyDi/eThJ1gQuoqFBksNRy2PT2VJQyUQqghxXCCsaMco6hGKzSYFhBbGImAzYueyAi7CGT7PBu6FQSo1+VjMX4uZOvomM1Tastl5FjjLEsPBoBkRrlbkNGGTVXKcBIPRT7DFRbT5eTX/+8u31UT7bxbCdk2QaRTBTqSJKM4+Ey9SwHFgo4KF6V9A4w3ipZiqr/NkEVX57RcUtXpw5CJuVyYZCRozrLvNYa6zDmOgEleedSUvTHg2Z6XraTADWKwtqQYEFkFvaIBXiEpHSleEGc2YXJbni3RmBGena6Lwis9cOfuQSQqtIBy7B3H9vkhTHebB2dyMiIMyhnDNky6EnpK38ztihMF2ihtnI+7ZV079V6zgYfCcC8mOFjmm+5g8aKbpFqZPDkR6EM7trY=
+  app: master-be
+  on:
+    branch: master
+  skip_cleanup: true
+
