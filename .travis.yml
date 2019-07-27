@@ -17,7 +17,7 @@ before_script:
 script:
 - npm run start:docker-ci
 - npm run stop:docker-ci
-- npm run boostrap
+- npm run bootstrap
 - npm run build
 notifications:
   email:
