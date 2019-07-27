@@ -4,19 +4,19 @@
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
 	npm ci
-	(cd ./server; npm ci)
-	(cd ./client; npm ci)
+	(cd ./server && npm ci)
+	(cd ./client && npm ci)
 	echo "\033[1;32mBootstrapping Complete\033[0m\n"
 
 lint:
 	echo "\033[0;36mLinting Commencing...\033[0m\n"
-	(cd ./server; npm run lint;)
-	(cd ./client; npm run lint;)
+	(cd ./server && npm run lint)
+	(cd ./client && npm run lint)
 
 lint-fix:
 	echo "\033[0;36mLinting Commencing...\033[0m\n"
-	(cd ./server; npm run lint-fix;)
-	(cd ./server; npm run lint-fix;)
+	(cd ./server &&  npm run lint-fix)
+	(cd ./server && npm run lint-fix)
 
 pre-commit:
 	make lint
