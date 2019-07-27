@@ -6,7 +6,7 @@ bootstrap:
 	npm i
 	(cd ./server; npm ci)
 	(cd ./client; npm ci)
-	echo "\033[0;36mBootstrapping Complete\033[0m\n"
+	echo "\033[1;32mBootstrapping Complete\033[0m\n"
 
 lint:
 	echo "\033[0;36mLinting Commencing...\033[0m\n"
@@ -31,7 +31,7 @@ ci:
 	echo "\033[0;36mCI Commencing...\033[0m\n"
 	make client-ci
 	make server-ci
-	echo "\033[0;36mCI Complete\033[0m\n"
+	echo "\033[1;32mCI Complete\033[0m\n"
 
 deploy: build
 	echo "\033[0;36mDeploy Beginning...\033[0m\n"
@@ -45,7 +45,7 @@ build: bootstrap
 	echo "\033[0;36mBuild Commencing...\033[0m\n"
 	(cd ./client && make build)
 	(cd ./server && make build)
-	echo "\033[0;36mBuild Complete\033[0m\n"
+	echo "\033[1;32mBuild Complete\033[0m\n"
 
 start:
 	echo "\033[0;36mStarting Application...\033[0m\n"
@@ -81,4 +81,4 @@ start-docker-ci: build-docker-ci
 
 stop-docker-ci:
 	-docker-compose -f dockerfiles/compose-ci.yml down
-	echo "\033[0;36mDocker Shutdown\033[0m\n"
+	echo "\033[1;32mDocker Shutdown\033[0m\n"
