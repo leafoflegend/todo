@@ -1,11 +1,12 @@
 .PHONY: lint lint-fix
-.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test
+.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test build start
 
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
 	npm i
 	(cd ./server; npm ci)
 	(cd ./client; npm ci)
+	echo "\033[0;36mBootstrapping Complete\033[0m\n"
 
 lint:
 	echo "\033[0;36mLinting Commencing...\033[0m\n"
@@ -32,13 +33,23 @@ ci:
 	make server-ci
 	echo "\033[0;36mCI Complete\033[0m\n"
 
-deploy:
+deploy: build
 	echo "\033[0;36mDeploy Beginning...\033[0m\n"
-	(cd ./server && make build && make start)
+	make start
 
 dev:
 	echo "\033[0;36mDev Build Starting...\033[0m\n"
 	(cd ./server && make dev) & (cd ./client && make dev)
+
+build: bootstrap
+	echo "\033[0;36mBuild Commencing...\033[0m\n"
+	(cd ./client && make build)
+	(cd ./server && make build)
+	echo "\033[0;36mBuild Complete\033[0m\n"
+
+start:
+	echo "\033[0;36mStarting Application...\033[0m\n"
+	(cd ./server && make start)
 
 docker-dev:
 	echo "\033[0;36mDocker Dev Build Starting...\033[0m\n"
