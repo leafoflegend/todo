@@ -11,6 +11,8 @@
     "pre-commit": "make pre-commit",
     "deploy": "make deploy",
     "dev": "make dev",
+    "build": "make build",
+    "start": "make start",
     "start:docker-production": "make start-docker-production",
     "stop:docker-production": "make stop-docker-production",
     "start:docker-development": "make start-docker-development",
