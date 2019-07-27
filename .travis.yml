@@ -32,5 +32,3 @@ deploy:
   on:
     branch: master
   skip_cleanup: true
-  local_dir: dist
-
