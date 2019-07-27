@@ -4,8 +4,12 @@
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
 	npm ci
-	(cd ./server && npm ci)
-	(cd ./client && npm ci)
+	cd ./server
+	npm ci
+	cd ..
+	cd ./client
+	npm ci
+	cd ..
 	echo "\033[1;32mBootstrapping Complete\033[0m\n"
 
 lint:
