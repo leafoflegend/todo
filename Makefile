@@ -69,4 +69,5 @@ start-docker-ci: build-docker-ci
 	docker-compose -f dockerfiles/compose-ci.yml up --abort-on-container-exit
 
 stop-docker-ci:
-	docker-compose -f dockerfiles/compose-ci.yml down
+	-docker-compose -f dockerfiles/compose-ci.yml down
+	echo "\033[0;36mDocker Shutdown\033[0m\n"
