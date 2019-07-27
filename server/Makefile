@@ -14,7 +14,7 @@ lint-fix:
 build:
 	echo "\033[0;36mBuilding Server...\033[0m\n"
 	$(NM)tsc
-	echo "\033[0;36mServer Built\033[0m\n"
+	echo "\033[1;32mServer Built\033[0m\n"
 
 build-watch:
 	$(NM)tsc -w
