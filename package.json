@@ -18,9 +18,7 @@
     "start:docker-development": "make start-docker-development",
     "stop:docker-development": "make stop-docker-development",
     "start:docker-ci": "make start-docker-ci",
-    "stop:docker-ci": "make stop-docker-ci",
-    "postinstall": "make bootstrap",
-    "heroku-postbuild": "make bootstrap"
+    "stop:docker-ci": "make stop-docker-ci"
   },
   "repository": {
     "type": "git",
@@ -30,7 +28,7 @@
     "node": "12.x"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eliot Szwajkowski - eliotpszw@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/leafoflegend/todo/issues"

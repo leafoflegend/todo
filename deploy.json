@@ -1,0 +1,25 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "cd ./dist && npm run start:local",
+    "start:local": "NODE_ENV=production DEPLOYED=true node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leafoflegend/todo.git"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "author": "Eliot Szwajkowski - eliotpszw@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leafoflegend/todo/issues"
+  },
+  "homepage": "https://github.com/leafoflegend/todo#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}

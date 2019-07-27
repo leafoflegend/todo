@@ -24,4 +24,4 @@ RUN cp -a /tmp/client/node_modules /usr/src/app/client/node_modules/
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 EXPOSE 8080
-CMD ["make", "deploy"]
+CMD ["make", "deploy-no-install"]
