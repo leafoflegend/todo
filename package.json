@@ -18,7 +18,9 @@
     "start:docker-development": "make start-docker-development",
     "stop:docker-development": "make stop-docker-development",
     "start:docker-ci": "make start-docker-ci",
-    "stop:docker-ci": "make stop-docker-ci"
+    "stop:docker-ci": "make stop-docker-ci",
+    "postinstall": "make bootstrap",
+    "heroku-postbuild": "make bootstrap"
   },
   "repository": {
     "type": "git",

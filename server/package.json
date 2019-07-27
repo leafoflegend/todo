@@ -13,8 +13,7 @@
     "dev": "make dev",
     "seed": "make seed",
     "start": "make start",
-    "detect-circular": "make detect-circular",
-    "postinstall": "make bootstrap"
+    "detect-circular": "make detect-circular"
   },
   "keywords": [],
   "author": "Eliot Szwajkowski (eliotpszw@gmail.com)",
