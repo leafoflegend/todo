@@ -12,10 +12,16 @@ const sequelizeProvider = {
   provide: CONSTANTS.REDIS,
   useFactory: async (): Promise<RedisProvider> => {
     try {
-      const resolvedRedisClient = await redis.createClient({
-        host: process.env.REDIS_HOST || 'localhost',
-        password: process.env.REDIS_PASSWORD || undefined,
-      });
+      let resolvedRedisClient: RedisClient;
+
+      if (!process.env.REDIS_URL) {
+        resolvedRedisClient = await redis.createClient({
+          host: process.env.REDIS_HOST || 'localhost',
+          password: process.env.REDIS_PASSWORD || undefined,
+        });
+      } else {
+        resolvedRedisClient = await redis.createClient(process.env.REDIS_URL);
+      }
 
       const redisReady = new Promise((res, rej) => {
         resolvedRedisClient.ping(e => {
