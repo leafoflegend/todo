@@ -45,7 +45,7 @@ dev:
 	echo "\033[0;36mDev Build Starting...\033[0m\n"
 	(cd ./server && make dev) & (cd ./client && make dev)
 
-build: bootstrap
+build:
 	echo "\033[0;36mBuild Commencing...\033[0m\n"
 	(cd ./client && make build)
 	(cd ./server && make build)
