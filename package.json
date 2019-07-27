@@ -24,6 +24,9 @@
     "type": "git",
     "url": "git+https://github.com/leafoflegend/todo.git"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

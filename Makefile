@@ -3,7 +3,7 @@
 
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
-	npm i
+	npm ci
 	(cd ./server; npm ci)
 	(cd ./client; npm ci)
 	echo "\033[1;32mBootstrapping Complete\033[0m\n"
