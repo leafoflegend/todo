@@ -1,5 +1,5 @@
 .PHONY: lint lint-fix
-.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test build start clean build-artifacts
+.SILENT: bootstrap lint lint-fix pre-commit deploy dev start-docker-development start-docker-production stop-docker-development stop-docker-production build-docker-development build-docker-production ci build-docker-test start-docker-test stop-docker-test build start clean build-artifacts heroku-deploy
 
 bootstrap:
 	echo "\033[0;36mBootstrapping...\033[0m\n"
@@ -62,9 +62,13 @@ build:
 	make build-artifacts
 	echo "\033[1;32mBuild Complete\033[0m\n"
 
+heroku-deploy:
+	rm package.json
+	cp deploy.json package.json
+
 start:
 	echo "\033[0;36mStarting Application...\033[0m\n"
-	(cd ./dist && npm run start)
+	(cd ./dist && npm run start:local)
 
 docker-dev:
 	echo "\033[0;36mDocker Dev Build Starting...\033[0m\n"

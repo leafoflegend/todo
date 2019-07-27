@@ -19,6 +19,7 @@ script:
 - npm run stop:docker-ci
 - npm run bootstrap
 - npm run build
+- make heroku-deploy
 notifications:
   email:
     on_success: always
