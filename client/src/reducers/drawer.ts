@@ -7,7 +7,7 @@ const initialState: State["drawer"] = {
   open: false,
 };
 
-const drawerReducer: Reducer = (state: State["drawer"], action: Action) => {
+const drawerReducer: Reducer = (state: State["drawer"] = initialState, action: Action) => {
   switch(action.type) {
     case TOGGLE_DRAWER:
       return produce(state, (draft: State["drawer"]): void => {
