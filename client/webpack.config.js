@@ -43,6 +43,23 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
+    chunkFilename: '[chunkhash].vendor.js',
     path: path.resolve(__dirname, 'dist')
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'all',
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+            return `npm.${packageName.replace('@', '')}`;
+          },
+          enforce: true
+        },
+      }
+    }
+  }
 };
