@@ -64,6 +64,8 @@ build:
 
 heroku-deploy:
 	rm package.json
+	rm package-lock.json
+	rm -rf node_modules
 	cp deploy.json package.json
 
 start:
