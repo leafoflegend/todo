@@ -6,7 +6,7 @@ const middleware = [];
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line
-  const createLogger = require('redux-logger');
+  const { createLogger } = require('redux-logger');
 
   middleware.push(createLogger());
 }
