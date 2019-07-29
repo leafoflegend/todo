@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import theme from './theme';
-import { NavBar } from './components/index';
-import store from './store/index';
+import { Shell } from './patterns/index';
+import store, { history } from './store/index';
 
 class Root extends Component {
   public render() {
@@ -13,7 +14,9 @@ class Root extends Component {
       <CssBaseline>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <NavBar />
+            <ConnectedRouter history={history}>
+              <Shell />
+            </ConnectedRouter>
           </Provider>
         </ThemeProvider>
       </CssBaseline>

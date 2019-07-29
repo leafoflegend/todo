@@ -1,5 +1,6 @@
-import { TOGGLE_DRAWER } from './drawer';
+import { TOGGLE_DRAWER, toggleDrawer } from './drawer';
 
 export {
   TOGGLE_DRAWER,
+  toggleDrawer,
 };

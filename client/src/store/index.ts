@@ -1,8 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from '../reducers';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
+import createRootReducer from '../reducers';
 
-const middleware = [];
+const history = createBrowserHistory();
+
+const middleware = [routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line
@@ -11,6 +15,11 @@ if (process.env.NODE_ENV === 'development') {
   middleware.push(createLogger());
 }
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(
+  createRootReducer(history),
+  composeWithDevTools(applyMiddleware(...middleware)),
+);
+
+export { history };
 
 export default store;
