@@ -58,7 +58,7 @@ class NavBar extends Component<Props> {
     const { classes, open, handleDrawerOpen } = this.props;
     return (
       <AppBar
-        position="fixed"
+        position="sticky"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
