@@ -11,7 +11,7 @@ module.exports = {
   },
   // TODO: This needs to be an env variable.
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin(),
     // TODO: These should also be configurable.
@@ -47,6 +47,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   optimization: {
+    usedExports: true,
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -59,8 +60,8 @@ module.exports = {
           },
           enforce: true
         },
-      }
-    }
+      },
+    },
   },
   watchOptions: {
     ignored: ['node_modules', 'server/**/*.js'],
