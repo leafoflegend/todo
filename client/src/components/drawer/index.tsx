@@ -17,9 +17,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { State } from '../../reducers/state';
+import { Icon } from '@material-ui/core';
+import { push } from 'connected-react-router';
+import { State, Desination } from '../../reducers/state';
 import { DRAWER_WIDTH } from '../../constants';
 import { toggleDrawer } from '../../actions/index';
 
@@ -47,17 +47,19 @@ interface OwnProps extends WithStyles<typeof styles> {
 
 interface StateProps {
   open: boolean;
+  destinations: Desination[];
 }
 
 interface DispatchProps {
   handleDrawerClose: () => void;
+  goTo: (route: string) => void;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
 
 class NavDrawer extends Component<Props> {
   public render() {
-    const { classes, open, handleDrawerClose, theme } = this.props;
+    const { classes, open, handleDrawerClose, theme, destinations, goTo } = this.props;
 
     return (
       <Drawer
@@ -76,10 +78,18 @@ class NavDrawer extends Component<Props> {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {destinations.map((destination: { name: string, icon: string, route: string }) => (
+            <ListItem
+              button
+              key={destination.name}
+              onClick={() => goTo(destination.route)}
+            >
+              <ListItemIcon>
+                <Icon>
+                  { destination.icon }
+                </Icon>
+              </ListItemIcon>
+              <ListItemText primary={destination.name} />
             </ListItem>
           ))}
         </List>
@@ -90,12 +100,14 @@ class NavDrawer extends Component<Props> {
 
 const ThemedStyledNavDrawer = withTheme(withStyles(styles)(NavDrawer));
 
-const mapStateToProps = ({ drawer: { open } }: State): StateProps => ({
+const mapStateToProps = ({ drawer: { open, destinations } }: State): StateProps => ({
   open,
+  destinations,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   handleDrawerClose: () => dispatch(toggleDrawer(false)),
+  goTo: (route: string) => dispatch(push(route)),
 });
 
 const ConnectedNavDrawer = connect(
