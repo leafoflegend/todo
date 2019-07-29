@@ -20,17 +20,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { State } from '../../reducers/state';
-
-const drawerWidth = 240;
+import { DRAWER_WIDTH } from '../../constants';
+import { toggleDrawer } from '../../actions/index';
 
 const styles = (theme: Theme) =>
   createStyles({
     drawer: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
     },
     drawerHeader: {
       display: 'flex',
@@ -95,7 +95,7 @@ const mapStateToProps = ({ drawer: { open } }: State): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  handleDrawerClose: () => {},
+  handleDrawerClose: () => dispatch(toggleDrawer(false)),
 });
 
 const ConnectedNavDrawer = connect(
