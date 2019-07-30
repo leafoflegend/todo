@@ -38,3 +38,4 @@ deploy:
     app: master-be-staging
     on:
       branch: staging
+    skip_cleanup: true
