@@ -11,7 +11,7 @@ module.exports = {
   },
   // TODO: This needs to be an env variable.
   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin(),
     // TODO: These should also be configurable.
@@ -43,6 +43,27 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
+    chunkFilename: '[chunkhash].vendor.js',
     path: path.resolve(__dirname, 'dist')
+  },
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'all',
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+            return `npm.${packageName.replace('@', '')}`;
+          },
+          enforce: true
+        },
+      },
+    },
+  },
+  watchOptions: {
+    ignored: ['node_modules', 'server/**/*.js'],
   },
 };
