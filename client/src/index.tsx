@@ -1,11 +1,3 @@
-/* eslint import/first: 0 no-cond-assign: 0 */
-if (process.env.NODE_ENV === 'production') {
-  // eslint-disable-next-line
-  const configureClient = require('./configure');
-
-  configureClient();
-}
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/styles';
@@ -15,6 +7,18 @@ import { ConnectedRouter } from 'connected-react-router';
 import theme from './theme';
 import { Shell } from './patterns/index';
 import store, { history } from './store/index';
+
+if (process.env.NODE_ENV === 'production') {
+  import('./configure')
+    .then(configure => configure.default())
+    .then(() => {
+      // TODO: Design logger for front end.
+      console.log('Application configured.');
+    })
+    .catch(e => {
+      console.error('Error configuring application.', e);
+    });
+}
 
 class Root extends Component {
   public render() {
