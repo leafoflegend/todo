@@ -46,7 +46,7 @@ dev:
 	(cd ./server && make dev) & (cd ./client && make dev)
 
 clean:
-	rm -rf dist
+	-rm -rf dist
 
 build-artifacts: clean
 	mkdir -p dist

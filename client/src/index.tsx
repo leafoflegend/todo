@@ -1,7 +1,7 @@
 /* eslint import/first: 0 no-cond-assign: 0 */
 if (process.env.NODE_ENV === 'production') {
   // eslint-disable-next-line
-  const configureClient = require('./constants');
+  const configureClient = require('./configure');
 
   configureClient();
 }

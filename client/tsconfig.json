@@ -8,7 +8,8 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "listEmittedFiles": true
   },
   "include": [
     "src/**/*"
