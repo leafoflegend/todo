@@ -52,8 +52,10 @@ build-artifacts: clean
 	mkdir -p dist
 	cp -R ./client/dist ./dist/dist
 	cp -R ./server/js/src ./dist/src
-	cp -R ./server/node_modules ./dist/node_modules
-	cp deploy.json ./dist/package.json
+	rm package.json
+	rm package-lock.json
+	rm -rf node_modules
+	cp -R ./server/node_modules ./node_modules
 
 build:
 	echo "\033[0;36mBuild Commencing...\033[0m\n"
@@ -63,9 +65,6 @@ build:
 	echo "\033[1;32mBuild Complete\033[0m\n"
 
 heroku-deploy:
-	rm package.json
-	rm package-lock.json
-	rm -rf node_modules
 	cp deploy.json package.json
 	git add -A
 	git commit -m 'Deploy'
