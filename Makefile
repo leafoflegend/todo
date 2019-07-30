@@ -66,7 +66,6 @@ build:
 
 heroku-deploy:
 	cp deploy.json package.json
-	rm .gitignore
 	git add -A
 	git commit -m 'Deploy'
 
