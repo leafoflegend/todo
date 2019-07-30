@@ -50,12 +50,13 @@ clean:
 
 build-artifacts: clean
 	mkdir -p dist
-	cp -R ./client/dist ./dist/dist
-	cp -R ./server/js/src ./dist/src
+	cp -a ./client/dist ./dist/dist
+	cp -a ./server/js/src ./dist/src
 	rm package.json
 	rm package-lock.json
 	rm -rf node_modules
-	cp -R ./server/node_modules ./node_modules
+	cp -a ./server/node_modules ./node_modules
+	cp -a ./server/node_modules ./dist/node_modules
 
 build:
 	echo "\033[0;36mBuild Commencing...\033[0m\n"
