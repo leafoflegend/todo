@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 const enum UserTypes {
   ADMIN = 'USER_TYPE_ADMIN',
   LEADER = 'USER_TYPE_LEADER',
@@ -32,6 +34,11 @@ const CONSTANTS = {
   },
   AUTHENTICATION: {
     SALT_ROUNDS: 12,
+  },
+  DIST_PATH: {
+    FOLDER: process.env.NODE_ENV === 'development'
+      ? join(__dirname, '..', '..', './client/dist')
+      : join(__dirname, '..', './dist'),
   },
 };
 
