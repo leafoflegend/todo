@@ -1,8 +1,16 @@
-import { ExceptionFilter, Catch, NotFoundException, HttpException, ArgumentsHost } from '@nestjs/common'
+import {
+  ExceptionFilter,
+  Catch,
+  NotFoundException,
+  HttpException,
+  ArgumentsHost,
+} from '@nestjs/common';
 import { join } from 'path';
 import CONSTANTS from '../../../../constants';
 
-const { DIST_PATH: { FOLDER } } = CONSTANTS;
+const {
+  DIST_PATH: { FOLDER },
+} = CONSTANTS;
 
 @Catch(NotFoundException)
 export class NotFoundExceptionFilter implements ExceptionFilter {
@@ -13,3 +21,5 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     response.sendFile(join(FOLDER, './index.html'));
   }
 }
+
+export default NotFoundExceptionFilter;
