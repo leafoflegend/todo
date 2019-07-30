@@ -67,6 +67,8 @@ heroku-deploy:
 	rm package-lock.json
 	rm -rf node_modules
 	cp deploy.json package.json
+	git add -A
+	git commit -m 'Deploy'
 
 start:
 	echo "\033[0;36mStarting Application...\033[0m\n"
