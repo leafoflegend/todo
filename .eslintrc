@@ -67,6 +67,7 @@
     "@typescript-eslint/camelcase": "warn",
     "no-useless-constructor": "warn",
     "no-empty-function": "warn",
+    "@typescript-eslint/no-empty-interface": "warn"
   },
   "settings": {
     "import/resolver": {

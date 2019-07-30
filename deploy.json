@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "cd ./dist && npm run start:local",
-    "start:local": "NODE_ENV=production DEPLOYED=true node src/index.js"
+    "start": "NODE_ENV=production DEPLOYED=true node ./dist/src/index.js"
   },
   "repository": {
     "type": "git",
