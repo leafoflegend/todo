@@ -1,4 +1,5 @@
 ## TODO
+![Build Status](https://travis-ci.com/leafoflegend/todo.svg?token=QLJypV4zPQRC27sbt7pk&branch=staging)
 
 **TODO (name concealed until later)** is an application for creating, managing, configuring, and submitting _arbitrary_ work. By _arbitrary_ we mean anything that can be done by anybody.
 
