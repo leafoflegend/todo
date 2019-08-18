@@ -6,6 +6,7 @@ import Comment from './models/comment';
 import Contribution from './models/contribution';
 import Contributor from './models/contributor';
 import Process from './models/process';
+import Session from './models/session';
 import Stage from './models/stage';
 import Task from './models/task';
 import Team from './models/team';
@@ -86,6 +87,7 @@ const models = {
   Team,
   User,
   UserTeam,
+  Session,
 };
 
 export { DBManager, models };

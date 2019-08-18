@@ -11,7 +11,10 @@ class HealthService {
   private readonly SEQUELIZE: SequelizeProvider;
   private readonly REDIS: RedisProvider;
 
-  public constructor(@Inject(CONSTANTS.SEQUELIZE) SEQUELIZE, @Inject(CONSTANTS.REDIS) REDIS) {
+  public constructor(
+    @Inject(CONSTANTS.SEQUELIZE) SEQUELIZE,
+    @Inject(CONSTANTS.REDIS) REDIS,
+  ) {
     this.SEQUELIZE = SEQUELIZE;
     this.REDIS = REDIS;
   }
@@ -28,7 +31,7 @@ class HealthService {
 
   public checkRedisHealth = async (): Promise<boolean> => {
     const isReadyPromise = new Promise<boolean>((res, rej) => {
-      this.REDIS.redis.ping(e => {
+      this.REDIS.client.ping(e => {
         if (e) {
           l.err('Error checking health of redis', e);
           rej(e);

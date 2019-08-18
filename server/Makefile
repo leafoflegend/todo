@@ -4,11 +4,11 @@
 NM = ./node_modules/.bin/
 
 lint:
-	.$(NM)eslint "src/**" --quiet
+	$(NM)eslint "src/**" --quiet
 	echo "\033[1;32mSuccess Linting Server!\033[0m\n"
 
 lint-fix:
-	.$(NM)eslint "src/**" --fix --quiet
+	$(NM)eslint "src/**" --fix --quiet
 	echo "\033[1;32mSuccess Linting and Fixing Server!\033[0m\n"
 
 build:
@@ -29,13 +29,13 @@ docker-dev:
 	NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w src
 
 dev:
-	NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w src
+	$(NM)tsc -w & NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js
 
 start:
 	NODE_ENV=production node js/src/index.js
 
 seed:
-	NODE_ENV=development CLEAR_DB=true SEED_DB=true LOCAL_DEV=true $(NM)nodemon -w src
+	$(NM)tsc -w & NODE_ENV=development CLEAR_DB=true SEED_DB=true LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js
 
 detect-circular:
 	$(NM)madge --circular js/src/index.js

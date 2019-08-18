@@ -14,6 +14,10 @@ const enum RoleTypes {
   READONLY = 'ROLE_TYPE_READONLY',
 }
 
+const enum RedisValues {
+  NO_USER = 'NO_USER',
+}
+
 const CONSTANTS = {
   SEQUELIZE: 'SEQUELIZE',
   REDIS: 'REDIS',
@@ -37,8 +41,11 @@ const CONSTANTS = {
   },
   DIST_PATH: {
     FOLDER: process.env.NODE_ENV === 'development'
-      ? join(__dirname, '..', '..', './client/dist')
+      ? join(__dirname, '..', '..', '..', './client/dist')
       : join(__dirname, '..', './dist'),
+  },
+  REDIS_VALUES: {
+    NO_USER: RedisValues.NO_USER,
   },
 };
 

@@ -42,11 +42,13 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[chunkhash].vendor.js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   optimization: {
+    moduleIds: 'hashed',
+    runtimeChunk: 'single',
     usedExports: true,
     splitChunks: {
       cacheGroups: {
