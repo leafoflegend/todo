@@ -4,11 +4,11 @@
 NM = ./node_modules/.bin/
 
 lint:
-	$(NM)eslint "src/**" --quiet
+	.$(NM)eslint "src/**" --quiet
 	echo "\033[1;32mSuccess Linting Server!\033[0m\n"
 
 lint-fix:
-	$(NM)eslint "src/**" --fix --quiet
+	.$(NM)eslint "src/**" --fix --quiet
 	echo "\033[1;32mSuccess Linting and Fixing Server!\033[0m\n"
 
 build:
