@@ -28,6 +28,7 @@
     "@types/redis": "^2.8.12",
     "@types/sequelize": "^4.27.44",
     "@types/source-map-support": "^0.5.0",
+    "@types/uuid": "^3.4.5",
     "chalk": "^2.4.2",
     "faker": "^4.1.0",
     "jest": "^24.1.0",
@@ -35,7 +36,6 @@
     "nodemon": "^1.18.10",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^23.10.5",
-    "ts-node": "^8.0.3",
     "typescript": "^3.5.3"
   },
   "dependencies": {
@@ -51,8 +51,9 @@
     "pg": "^7.9.0",
     "redis": "^2.8.0",
     "rxjs": "^6.5.2",
-    "sequelize": "^5.8.6",
-    "sequelize-typescript": "^1.0.0-alpha.9",
-    "source-map-support": "^0.5.11"
+    "sequelize": "^5.15.1",
+    "sequelize-typescript": "^1.0.0-beta.4",
+    "source-map-support": "^0.5.11",
+    "uuid": "^3.3.2"
   }
 }

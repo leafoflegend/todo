@@ -29,13 +29,13 @@ docker-dev:
 	NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w src
 
 dev:
-	NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w src
+	$(NM)tsc -w & NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js
 
 start:
 	NODE_ENV=production node js/src/index.js
 
 seed:
-	NODE_ENV=development CLEAR_DB=true SEED_DB=true LOCAL_DEV=true $(NM)nodemon -w src
+	$(NM)tsc -w & NODE_ENV=development CLEAR_DB=true SEED_DB=true LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js
 
 detect-circular:
 	$(NM)madge --circular js/src/index.js

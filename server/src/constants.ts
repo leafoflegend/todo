@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 const enum UserTypes {
   ADMIN = 'USER_TYPE_ADMIN',
   LEADER = 'USER_TYPE_LEADER',
@@ -10,6 +12,10 @@ const enum RoleTypes {
   LEADER = 'ROLE_TYPE_LEADER',
   STANDARD = 'ROLE_TYPE_STANDARD',
   READONLY = 'ROLE_TYPE_READONLY',
+}
+
+const enum RedisValues {
+  NO_USER = 'NO_USER',
 }
 
 const CONSTANTS = {
@@ -32,6 +38,14 @@ const CONSTANTS = {
   },
   AUTHENTICATION: {
     SALT_ROUNDS: 12,
+  },
+  DIST_PATH: {
+    FOLDER: process.env.NODE_ENV === 'development'
+      ? join(__dirname, '..', '..', '..', './client/dist')
+      : join(__dirname, '..', './dist'),
+  },
+  REDIS_VALUES: {
+    NO_USER: RedisValues.NO_USER,
   },
 };
 

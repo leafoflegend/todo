@@ -9,7 +9,6 @@ class Session extends Model<Session> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
-    defaultValue: DataType.UUIDV4,
   })
   public id!: number;
 

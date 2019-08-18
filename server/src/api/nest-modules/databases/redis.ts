@@ -1,9 +1,16 @@
 import redis, { RedisClient } from 'redis';
+import { promisify } from 'util';
 import CONSTANTS from '../../../constants';
 import { Logger } from '../../../utils';
 
+export interface PromisifiedRedisClient extends RedisClient {
+  asyncGet: (key: string) => Promise<string>;
+  asyncSet: (key: string, value: string) => Promise<unknown>;
+  asyncDel: (key: string) => Promise<number>;
+}
+
 export interface RedisProvider {
-  redis: RedisClient;
+  client: PromisifiedRedisClient;
 }
 
 const l = new Logger('redis module');
@@ -36,8 +43,19 @@ const sequelizeProvider = {
 
       await redisReady;
 
+      const promisifiedRedisClient: PromisifiedRedisClient = resolvedRedisClient as PromisifiedRedisClient;
+      promisifiedRedisClient.asyncGet = promisify(resolvedRedisClient.get).bind(
+        resolvedRedisClient,
+      );
+      promisifiedRedisClient.asyncSet = promisify(resolvedRedisClient.set).bind(
+        resolvedRedisClient,
+      );
+      promisifiedRedisClient.asyncDel = promisify(resolvedRedisClient.del).bind(
+        resolvedRedisClient,
+      );
+
       return {
-        redis: resolvedRedisClient,
+        client: promisifiedRedisClient,
       };
     } catch (e) {
       l.err('Error creating redis client.', e);
