@@ -22,6 +22,7 @@ import { push } from 'connected-react-router';
 import { State, Desination } from '../../reducers/state';
 import { DRAWER_WIDTH } from '../../constants';
 import { toggleDrawer } from '../../actions/index';
+import { drawerDestinationsSelector, drawerOpenSelector } from '../../selectors/index';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -100,9 +101,9 @@ class NavDrawer extends Component<Props> {
 
 const ThemedStyledNavDrawer = withTheme(withStyles(styles)(NavDrawer));
 
-const mapStateToProps = ({ drawer: { open, destinations } }: State): StateProps => ({
-  open,
-  destinations,
+const mapStateToProps = ({ drawer }: State): StateProps => ({
+  open: drawerOpenSelector(drawer),
+  destinations: drawerDestinationsSelector(drawer),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

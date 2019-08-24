@@ -3,7 +3,7 @@ import { withStyles, createStyles, WithStyles, Theme } from '@material-ui/core/s
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import clsx from 'clsx';
-import { Drawer, NavBar } from '../../components/index';
+import { Drawer, NavBar, Modal } from '../../components/index';
 import Router from '../router/index';
 import { DRAWER_WIDTH } from '../../constants';
 import { State } from '../../reducers/state';
@@ -50,6 +50,7 @@ class Shell extends Component<Props> {
         <div className={classes.root}>
           <NavBar />
           <Drawer />
+          <Modal />
         </div>
         <main
           className={clsx(classes.content, {

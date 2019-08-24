@@ -11,5 +11,8 @@ export interface State {
     open: boolean;
     destinations: Desination[];
   };
+  modal: {
+    open: boolean;
+  };
   router: RouterState;
 };
