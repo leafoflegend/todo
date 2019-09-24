@@ -1,10 +1,12 @@
 import produce from 'immer';
 import { AnyAction, Reducer } from 'redux';
-import { TOGGLE_MODAL } from '../actions/index';
-import { State } from './state';
+import { TOGGLE_MODAL } from '../../actions/index';
+import { State } from '../state';
 
 const initialState: State['modal'] = {
   open: false,
+  title: '',
+  type: '',
 };
 
 const modalReducer: Reducer = (state: State['modal'] = initialState, action: AnyAction) => {

@@ -10,9 +10,11 @@ import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { Dispatch } from 'redux';
 import { State } from '../../reducers/state';
-import { DRAWER_WIDTH } from '../../constants';
+import CONSTANTS from '../../constants';
 import { toggleDrawer, toggleModal } from '../../actions/index';
 import { drawerOpenSelector } from '../../selectors/index';
+
+const { VISUAL: { DRAWER_WIDTH } } = CONSTANTS;
 
 const styles = (theme: Theme) =>
   createStyles({

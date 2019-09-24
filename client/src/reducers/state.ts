@@ -13,6 +13,8 @@ export interface State {
   };
   modal: {
     open: boolean;
+    title: string;
+    type: string;
   };
   router: RouterState;
 };

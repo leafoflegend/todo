@@ -7,11 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles, WithStyles, createStyles, Theme, withTheme, WithTheme } from '@material-ui/core/styles';
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import MediaQuery from 'react-responsive';
 import { State } from '../../reducers/state';
-import { modalOpenSelector } from '../../selectors/index';
+import { toggleModal } from '../../actions/index';
+import { modalOpenSelector, modalTitleSelector, modalTypeSelector } from '../../selectors/index';
 
 const styles = (theme: Theme) => createStyles({
 
@@ -21,27 +23,41 @@ interface OwnProps {}
 
 interface StateProps {
   open: boolean;
+  title: string;
 }
 
-interface DispatchProps {}
+interface DispatchProps {
+  onClose: () => void;
+}
 
 interface StyleProps extends WithStyles<typeof styles> {}
 interface ThemeProps extends WithTheme {}
+interface WidthProps {
+  width: Breakpoint;
+}
 
-type Props = OwnProps & StateProps & DispatchProps & StyleProps & ThemeProps;
+type Props = OwnProps & StateProps & DispatchProps & StyleProps & ThemeProps & WidthProps;
 
 class Modal extends Component<Props> {
-  public render() {
-    const { open, theme } = this.props;
+  private get isFullscreen(): boolean {
+    const { width } = this.props;
 
-    console.log(theme.breakpoints.down('sm'));
+    console.log(width);
+
+    return isWidthDown('sm', width);
+  }
+
+  public render() {
+    const { open, title, onClose } = this.props;
 
     return (
       <Fragment>
         <Dialog
           open={open}
+          fullScreen={this.isFullscreen}
+          onClose={onClose}
         >
-          I am a teapot.
+          <DialogTitle>{title}</DialogTitle>
         </Dialog>
       </Fragment>
     );
@@ -50,11 +66,17 @@ class Modal extends Component<Props> {
 
 const mapStateToProps = ({ modal }: State) => ({
   open: modalOpenSelector(modal),
+  title: modalTitleSelector(modal),
+  type: modalTypeSelector(modal),
 });
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onClose: () => dispatch(toggleModal(false)),
+});
 
 const StyledThemedModal = withTheme(withStyles(styles)(Modal));
 
-const ConnectedModal = connect(mapStateToProps, mapDispatchToProps)(StyledThemedModal);
+const WidthSuppliedModal = withWidth()(StyledThemedModal);
+
+const ConnectedModal = connect(mapStateToProps, mapDispatchToProps)(WidthSuppliedModal);
 
 export default ConnectedModal;
