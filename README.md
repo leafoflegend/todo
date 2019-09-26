@@ -13,6 +13,8 @@
 
 #### **OR**
 
+**NOTE: docker-development is broken due to a path to the entry point being wrong.**
+
 1. Install [Docker](https://www.docker.com/products/docker-desktop)
 2. Run `npm run bootstrap && npm run start:docker-development`
 

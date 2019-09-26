@@ -42,8 +42,6 @@ class Modal extends Component<Props> {
   private get isFullscreen(): boolean {
     const { width } = this.props;
 
-    console.log(width);
-
     return isWidthDown('sm', width);
   }
 

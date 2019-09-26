@@ -29,7 +29,7 @@ docker-dev:
 	NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w src
 
 dev:
-	$(NM)tsc -w & NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js
+	$(NM)tsc -w & NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js --delay 1
 
 start:
 	NODE_ENV=production node js/src/index.js

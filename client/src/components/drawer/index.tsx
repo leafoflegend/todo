@@ -29,7 +29,6 @@ const { VISUAL: { DRAWER_WIDTH } } = CONSTANTS;
 const styles = (theme: Theme) =>
   createStyles({
     drawer: {
-      width: DRAWER_WIDTH,
       flexShrink: 0,
     },
     drawerPaper: {
