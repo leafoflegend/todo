@@ -26,7 +26,7 @@ test-watch:
 	NODE_ENV=test $(NM)jest --watch
 
 docker-dev:
-	NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w src
+	$(NM)tsc -w & NODE_ENV=development DOCKER_DEV=true $(NM)nodemon -w js js/src/index.js --delay 1
 
 dev:
 	$(NM)tsc -w & NODE_ENV=development LOCAL_DEV=true $(NM)nodemon -w js js/src/index.js --delay 1
