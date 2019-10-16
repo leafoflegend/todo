@@ -1,10 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React, { Component, Fragment, ExoticComponent, Suspense } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles, WithStyles, createStyles, Theme, withTheme, WithTheme } from '@material-ui/core/styles';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
@@ -14,16 +11,24 @@ import { Dispatch } from 'redux';
 import { State } from '../../reducers/state';
 import { toggleModal } from '../../actions/index';
 import { modalOpenSelector, modalTitleSelector, modalTypeSelector } from '../../selectors/index';
+import CONSTANTS from '../../constants';
 
-const styles = (theme: Theme) => createStyles({
+const { MODAL: { TYPES: { LOGIN } } } = CONSTANTS;
 
-});
+const SuspenseComponent = () => <div>Loading...</div>;
+const LoginForm = React.lazy(() => import('../../businents/login-form/index'));
+const LoginActions = React.lazy(() => import('../../businents/login-form/actions'));
+const InvalidModalType = React.lazy(() => import('../../businents/invalid-modal-type/index'));
+const InvalidModalAction = React.lazy(() => import('../../businents/invalid-modal-action/index'));
+
+const styles = (theme: Theme) => createStyles({});
 
 interface OwnProps {}
 
 interface StateProps {
   open: boolean;
   title: string;
+  type: string;
 }
 
 interface DispatchProps {
@@ -38,25 +43,70 @@ interface WidthProps {
 
 type Props = OwnProps & StateProps & DispatchProps & StyleProps & ThemeProps & WidthProps;
 
+const customDialogStyles = createStyles({
+  paper: {
+    minWidth: '600px',
+  },
+});
+
+const CustomDialog = withStyles(customDialogStyles)(Dialog);
+
 class Modal extends Component<Props> {
   private get isFullscreen(): boolean {
     const { width } = this.props;
 
-    return isWidthDown('sm', width);
+    return isWidthDown('xs', width);
+  }
+
+  private get TypedDialogContent(): ExoticComponent<any> {
+    const { type } = this.props;
+
+    switch (type) {
+      case LOGIN:
+        return LoginForm;
+      default:
+        return InvalidModalType;
+    }
+  }
+
+  private get TypedDialogActions(): ExoticComponent<any> {
+    const { type } = this.props;
+
+    switch (type) {
+      case LOGIN:
+        return LoginActions;
+      default:
+        return InvalidModalAction;
+    }
   }
 
   public render() {
-    const { open, title, onClose } = this.props;
+    const { open, title, onClose, classes } = this.props;
+    const { TypedDialogContent, TypedDialogActions } = this;
 
     return (
       <Fragment>
-        <Dialog
+        <CustomDialog
           open={open}
           fullScreen={this.isFullscreen}
           onClose={onClose}
         >
           <DialogTitle>{title}</DialogTitle>
-        </Dialog>
+          <DialogContent>
+            <Suspense
+              fallback={<SuspenseComponent />}
+            >
+              { <TypedDialogContent /> }
+            </Suspense>
+          </DialogContent>
+          <DialogActions>
+            <Suspense
+              fallback={<SuspenseComponent />}
+            >
+              { <TypedDialogActions /> }
+            </Suspense>
+          </DialogActions>
+        </CustomDialog>
       </Fragment>
     );
   }

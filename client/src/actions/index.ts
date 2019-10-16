@@ -1,5 +1,12 @@
 import { TOGGLE_DRAWER, toggleDrawer } from './drawer';
-import { TOGGLE_MODAL, toggleModal, setModalType, SET_MODAL_TYPE } from './modal';
+import {
+  TOGGLE_MODAL,
+  toggleModal,
+  setModalType,
+  SET_MODAL_TYPE,
+  SET_FORM_FIELD_VALUE,
+  setFormField,
+} from './modal';
 
 export {
   TOGGLE_DRAWER,
@@ -8,4 +15,6 @@ export {
   toggleModal,
   SET_MODAL_TYPE,
   setModalType,
+  SET_FORM_FIELD_VALUE,
+  setFormField,
 };

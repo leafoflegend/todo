@@ -11,10 +11,10 @@ import clsx from 'clsx';
 import { Dispatch } from 'redux';
 import { State } from '../../reducers/state';
 import CONSTANTS from '../../constants';
-import { toggleDrawer, toggleModal } from '../../actions/index';
+import { toggleDrawer, toggleModal, setModalType } from '../../actions/index';
 import { drawerOpenSelector } from '../../selectors/index';
 
-const { VISUAL: { DRAWER_WIDTH } } = CONSTANTS;
+const { VISUAL: { DRAWER_WIDTH }, MODAL: { TYPES: { LOGIN } } } = CONSTANTS;
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -93,7 +93,10 @@ const mapStateToProps = ({ drawer }: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  login: () => dispatch(toggleModal(true)),
+  login: () => {
+    dispatch(toggleModal(true));
+    dispatch(setModalType(LOGIN));
+  },
   handleDrawerOpen: () => dispatch(toggleDrawer(true)),
 });
 

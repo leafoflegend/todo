@@ -6,6 +6,13 @@ export interface Desination {
   icon: string;
 }
 
+export interface FormField {
+  value: any;
+  dirty: boolean;
+  error: string;
+  required: boolean;
+}
+
 export interface State {
   drawer: {
     open: boolean;
@@ -15,6 +22,9 @@ export interface State {
     open: boolean;
     title: string;
     type: string;
+    formData: {
+      [formField: string]: FormField;
+    };
   };
   router: RouterState;
 };
