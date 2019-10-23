@@ -1,7 +1,6 @@
 import React, { ChangeEvent, Component, Fragment } from 'react';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { State } from '../../reducers/state';
@@ -14,6 +13,9 @@ const formStyles = (theme: Theme) => createStyles({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+  },
+  inputField: {
+    margin: '0.5em 0',
   },
 });
 
@@ -44,14 +46,17 @@ class LoginForm extends Component<FormProps> {
         onSubmit={e => e.preventDefault()}
       >
         <TextField
+          className={classes.inputField}
           value={username}
           label="Username"
           onChange={changeUsername}
           fullWidth
         />
         <TextField
+          className={classes.inputField}
           value={password}
           label="Password"
+          type="password"
           onChange={changePassword}
           fullWidth
         />
