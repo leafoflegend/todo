@@ -47,6 +47,7 @@ const CONSTANTS = {
   REDIS_VALUES: {
     NO_USER: RedisValues.NO_USER,
   },
+  COOKIE_NAME: process.env.SESSION_COOKE_NAME || 'SID',
 };
 
 export { UserTypes, RoleTypes };

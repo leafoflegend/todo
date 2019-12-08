@@ -12,6 +12,12 @@ class Session extends Model<Session> {
   })
   public id!: number;
 
+  @Column({
+    type: DataType.JSONB,
+    defaultValue: {},
+  })
+  public sessionData!: object;
+
   @HasOne(() => User)
   public user!: User;
 }
