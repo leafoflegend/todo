@@ -7,8 +7,7 @@ import { Logger } from '../../../../utils';
 import { SequelizeProvider } from '../../databases/sequelize';
 import { RedisProvider } from '../../databases/redis';
 
-const { SESSION_COOKE_NAME } = process.env;
-const cookieName: string = SESSION_COOKE_NAME || 'SID';
+const { COOKIE_NAME } = CONSTANTS;
 
 const destroySession = async <M extends ConstructableModel>(
   sessionModel: M,
@@ -19,7 +18,7 @@ const destroySession = async <M extends ConstructableModel>(
   const mySession = await sessionModel.findByPk(sessionId);
   if (mySession) await mySession.destroy();
   await redisClient.asyncDel(sessionId);
-  res.clearCookie(cookieName);
+  res.clearCookie(COOKIE_NAME);
 };
 
 const createDestroySession = <M extends ConstructableModel>(
@@ -45,14 +44,17 @@ class SessionMiddleware implements NestMiddleware {
     this.REDIS = REDIS;
   }
 
-  public async use(req: Request, res: Response, next: Function) {
+  public async use(req: Request, res: Response, next: Function): Promise<void> {
     const models = this.SEQUELIZE.models;
 
-    if (req.cookies[cookieName]) {
-      const sessionId: string = req.cookies[cookieName];
+    if (req.cookies[COOKIE_NAME]) {
+      const sessionId: string = req.cookies[COOKIE_NAME];
 
+      // TODO: Check if this response is null.
       const stringJSONSession: string = await this.REDIS.client.asyncGet(sessionId);
 
+      // TODO: Use Object.defineProperty and a Proxy to monitor changes to this object.
+      // TODO: OR: Have a middleware on the way out that syncs the data to Redis.
       const session: Request['session'] = {
         ...JSON.parse(stringJSONSession),
         destroy: createDestroySession<typeof models.Session>(
@@ -91,15 +93,11 @@ class SessionMiddleware implements NestMiddleware {
         ),
       };
 
-      res.cookie(
-        cookieName,
-        newSessionId,
-        {
-          maxAge: 1000 * 60 * 60 * 24 * 31,
-          path: '/',
-          httpOnly: true,
-        },
-      );
+      res.cookie(COOKIE_NAME, newSessionId, {
+        maxAge: 1000 * 60 * 60 * 24 * 31,
+        path: '/',
+        httpOnly: true,
+      });
     }
 
     next();

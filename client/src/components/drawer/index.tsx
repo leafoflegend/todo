@@ -20,13 +20,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Icon } from '@material-ui/core';
 import { push } from 'connected-react-router';
 import { State, Desination } from '../../reducers/state';
-import { DRAWER_WIDTH } from '../../constants';
+import CONSTANTS from '../../constants';
 import { toggleDrawer } from '../../actions/index';
+import { drawerDestinationsSelector, drawerOpenSelector } from '../../selectors/index';
+
+const { VISUAL: { DRAWER_WIDTH } } = CONSTANTS;
 
 const styles = (theme: Theme) =>
   createStyles({
     drawer: {
-      width: DRAWER_WIDTH,
       flexShrink: 0,
     },
     drawerPaper: {
@@ -100,9 +102,9 @@ class NavDrawer extends Component<Props> {
 
 const ThemedStyledNavDrawer = withTheme(withStyles(styles)(NavDrawer));
 
-const mapStateToProps = ({ drawer: { open, destinations } }: State): StateProps => ({
-  open,
-  destinations,
+const mapStateToProps = ({ drawer }: State): StateProps => ({
+  open: drawerOpenSelector(drawer),
+  destinations: drawerDestinationsSelector(drawer),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

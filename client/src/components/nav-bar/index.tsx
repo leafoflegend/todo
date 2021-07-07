@@ -10,8 +10,11 @@ import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { Dispatch } from 'redux';
 import { State } from '../../reducers/state';
-import { DRAWER_WIDTH } from '../../constants';
-import { toggleDrawer } from '../../actions/index';
+import CONSTANTS from '../../constants';
+import { toggleDrawer, toggleModal, setModalType } from '../../actions/index';
+import { drawerOpenSelector } from '../../selectors/index';
+
+const { VISUAL: { DRAWER_WIDTH }, MODAL: { TYPES: { LOGIN } } } = CONSTANTS;
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -55,7 +58,7 @@ type Props = StateProps & DispatchProps & OwnProps;
 
 class NavBar extends Component<Props> {
   public render() {
-    const { classes, open, handleDrawerOpen } = this.props;
+    const { classes, open, handleDrawerOpen, login } = this.props;
     return (
       <AppBar
         position="sticky"
@@ -76,7 +79,7 @@ class NavBar extends Component<Props> {
           <Typography variant="h6" className={classes.title}>
             ToDo
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={login}>Login</Button>
         </Toolbar>
       </AppBar>
     );
@@ -85,12 +88,15 @@ class NavBar extends Component<Props> {
 
 const StyledNavBar = withStyles(styles)(NavBar);
 
-const mapStateToProps = ({ drawer: { open } }: State) => ({
-  open,
+const mapStateToProps = ({ drawer }: State) => ({
+  open: drawerOpenSelector(drawer),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  login: () => {},
+  login: () => {
+    dispatch(toggleModal(true));
+    dispatch(setModalType(LOGIN));
+  },
   handleDrawerOpen: () => dispatch(toggleDrawer(true)),
 });
 

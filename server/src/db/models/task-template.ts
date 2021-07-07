@@ -74,7 +74,7 @@ class TaskTemplate extends Model<TaskTemplate> {
       name: string;
       description: string;
       task_template_id: number;
-      assigned_to_id?: number;
+      assigned_to_id?: string;
       team_id?: number;
       stage_id: number;
     } = {

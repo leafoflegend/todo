@@ -25,7 +25,9 @@ import Contributor from './contributor';
 import UserAssignmentWatcher from './user-assignment-watcher';
 import UserTaskWatcher from './user-task-watcher';
 import Session from './session';
+import Logger from '../../utils/logger';
 
+const l = new Logger('user model');
 const { ADMIN, LEADER, READONLY, STANDARD } = CONSTANTS.USER_TYPES;
 
 class AuthenticationError extends Error {
@@ -53,7 +55,7 @@ class User extends Model<User> {
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   })
-  public id!: number;
+  public id!: string;
 
   @Column({
     type: DataType.STRING,
@@ -103,7 +105,6 @@ class User extends Model<User> {
   @ForeignKey(() => Session)
   @Column({
     type: DataType.UUID,
-    allowNull: false,
   })
   public session_id!: number;
 
@@ -166,7 +167,7 @@ class User extends Model<User> {
   public static authenticateUser = async (loginInfo: {
     email: string;
     password: string;
-  }): Promise<boolean> => {
+  }): Promise<User> => {
     const { email, password } = loginInfo;
 
     try {
@@ -177,12 +178,46 @@ class User extends Model<User> {
       });
 
       if (user) {
-        return comparePassAndHash(password, user.password);
+        await comparePassAndHash(password, user.password);
+        return user;
       }
 
-      return false;
+      throw new Error('User not found!');
     } catch (e) {
       throw new AuthenticationError(`Failed to authenticate user. Error: ${e.message}`);
+    }
+  };
+
+  public associateSession = async (sessionId): Promise<Session> => {
+    // TODO: This should be a transaction block.
+    try {
+      let decidedSession: Session;
+      const newSession = await Session.findByPk(sessionId);
+
+      if (!newSession) throw new Error(`Current session not found for sessionId ${sessionId}`);
+
+      if (this.session_id) {
+        const restoreSession = await Session.findByPk(this.session_id);
+
+        if (!restoreSession) {
+          l.info(`While attempting to restore a users session ${this.session_id}, the session could not be discovered. Going to associate the new session ${sessionId} instead.`);
+          decidedSession = newSession;
+        } else {
+          await newSession.destroy();
+          decidedSession = restoreSession;
+        }
+      } else {
+        decidedSession = newSession;
+      }
+
+      await this.update({
+        session_id: decidedSession.id,
+      });
+
+      return decidedSession;
+    } catch (e) {
+      l.err(`Failed to associate session to user ${this.id}.`, e.message);
+      throw e;
     }
   };
 }
